@@ -1,2 +1,4 @@
 /.history/
-./BlockChainDemo/node_modules
+./BlockChainDemo/node_modules/
+./BlockChainDemo/.history
+.gitgnore
