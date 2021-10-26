@@ -1,0 +1,100 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
+        <link rel="stylesheet" href="javascripts/styles.css">
+        <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="#"><i class="fas fa-user"></i>Profile</a></li>
+                <li><a href="#"><i class="fas fa-address-card"></i>About</a></li>
+                <li><a href="#"><i class="fas fa-project-diagram"></i>portfolio</a></li>
+                <li><a href="#"><i class="fas fa-blog"></i>Blogs</a></li>
+                <li><a href="#"><i class="fas fa-address-book"></i>Contact</a></li>
+                <li><a href="#"><i class="fas fa-map-pin"></i>Map</a></li>
+            </ul> 
+            <div class="social_media">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div class="main_content">
+            <h2><a href="index.html">ETH</a></h2>
+            <h4>Simple Auction</h4>
+        
+            <hr />
+        
+            <div class="row">
+                <div class="column">
+                    <label>受益人</label>
+                    <blockquote>
+                        <p><em id="beneficiary">0x123456789..</em><br /></p>
+                    </blockquote>
+                </div>
+                <div class="column">
+                    <label>价格</label>
+                    <blockquote>
+                        <p><em><span id="raised">15600ETH</span><br /></em></p>
+                    </blockquote>
+                </div>
+                <div class="column">
+                    <label>剩余时间</label>
+                    <blockquote>
+                        <p><em id="timeleft">1500s</em><br /></p>
+                    </blockquote>
+                </div>
+                <div class="column">
+                    <label>出价最高者</label>
+                    <blockquote>
+                        <p><em><span id="highestBidder"></span>0x123456789...<br />
+                                <span id="highestBid"></span></em></p>
+                    </blockquote>
+                </div>
+                <div class="column">
+                    <label>我的账户<label>
+                            <blockquote>
+                                <p><em id="accountAddress">0x123456789..</em><br /></p>
+                            </blockquote>
+                </div>
+                <div class="column">
+                    <label>我的余额</label>
+                    <blockquote>
+                        <p><em id="accountBalance">123456789...ETH</em><br /></p>
+                    </blockquote>
+                </div>
+            </div>
+        
+            <hr />
+        
+            <div class="row">
+                <div class="column column-33">
+                    <label>账户</label>
+                    <select id="bidAccount">
+                    <option>0x123456789</option>
+                    </select>
+                </div>
+                <div class="column column-25">
+                    <label>竞拍价格</label>
+                    <input type="number" id="bidAmount" placeholder="28300 ether">
+                </div>
+                <div class="column column-25">
+                    <label><br /></label>
+                    <button id="makeBid">竞拍</button>
+                </div>
+            </div>
+        
+            <hr />
+        
+            <button id="endAuction" disabled="disabled">结束竞拍</button>
+          </div>
+        </div>
+    </div>
+    

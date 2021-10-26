@@ -1,0 +1,81 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
+</head>
+
+<body class="container" style="padding-top: 3%;">
+    <h2><a href="index.html">ETH</a></h2>
+    <h4>Simple Auction</h4>
+
+    <hr />
+
+    <div class="row">
+        <div class="column">
+            <label>受益人</label>
+            <blockquote>
+                <p><em id="beneficiary">0x123456789..</em><br /></p>
+            </blockquote>
+        </div>
+        <div class="column">
+            <label>价格</label>
+            <blockquote>
+                <p><em><span id="raised">15600ETH</span><br /></em></p>
+            </blockquote>
+        </div>
+        <div class="column">
+            <label>剩余时间</label>
+            <blockquote>
+                <p><em id="timeleft">1500s</em><br /></p>
+            </blockquote>
+        </div>
+        <div class="column">
+            <label>出价最高者</label>
+            <blockquote>
+                <p><em><span id="highestBidder"></span>0x123456789...<br />
+                        <span id="highestBid"></span></em></p>
+            </blockquote>
+        </div>
+        <div class="column">
+            <label>我的账户<label>
+                    <blockquote>
+                        <p><em id="accountAddress">0x123456789..</em><br /></p>
+                    </blockquote>
+        </div>
+        <div class="column">
+            <label>我的余额</label>
+            <blockquote>
+                <p><em id="accountBalance">123456789...ETH</em><br /></p>
+            </blockquote>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row">
+        <div class="column column-33">
+            <label>账户</label>
+            <select id="bidAccount">
+            <option>0x123456789</option>
+            </select>
+        </div>
+        <div class="column column-25">
+            <label>Bid Amount</label>
+            <input type="number" id="bidAmount" placeholder="28300 ether">
+        </div>
+        <div class="column column-25">
+            <label><br /></label>
+            <button id="makeBid">Bid</button>
+        </div>
+    </div>
+
+    <hr />
+
+    <button id="endAuction" disabled="disabled">End Auction</button>
+
+    <br /><br />
+
+    <div id="response"></div>
+
+   
