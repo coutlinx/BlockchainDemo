@@ -21,8 +21,8 @@
 			<div class="switch_bottom" id="switch_bottom"></div>
 		</nav>
 		<div id="login">
-			<form method="post" action="">
 				<ul class="group_input">
+					<form id="from" onsubmit="return false;">
 					<li>
 						<input type="text" class="mobile required" id="mobile" placeholder="手机号或邮箱" />
 					</li>
@@ -82,6 +82,10 @@
 		requestAnimationFrame(update);
 	</script>
 	<script>
+			let user = {
+		name: "",
+		password: "",
+	};
 		$(".download_btn").click(function(){
 			if($(".QRcode").css("display")=="none"){
 				$(".QRcode").show();
@@ -115,6 +119,7 @@
 					$parent.append("<span class='msg onError'>" + errorMsg + "</span>");
 				} else{
 					var okMsg=" 输入正确";
+					user.name = mobileVal;
                     $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
 				}
 			}
@@ -128,6 +133,7 @@
                 }
                 else{
                     var okMsg=" 输入正确";
+					user.password = psdVal;
                     $parent.append("<span class='msg onSuccess'>" + okMsg + "</span>");
                 }
             }
@@ -150,7 +156,23 @@
 
     	});
 		})
-		
+		$("#from").submit(function () {
+			send();
+		})
+		function send() {
+		if (user.name == "" || user.password == "") {
+			alert('请填完所有的字段')
+		} else {
+			$.ajax({
+				url: "http://localhost:3000/login",
+				method: "post",
+				data: user,
+				success: function (data) {
+					console.log(data)
+				},
+			})
+		}
+	}
 	</script>
 </body>
 </html>

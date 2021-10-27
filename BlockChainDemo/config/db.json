@@ -1,0 +1,8 @@
+ 
+{
+    "login_register":[
+        {"insert":"INSERT INTO user (name,passwd,phone) VALUES (?,?,?)"},
+        {"select":"SELECT FROM user WHERE name = ?"}
+        
+    ]
+}

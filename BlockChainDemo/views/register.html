@@ -172,18 +172,15 @@
 			alert('请填完所有的字段')
 		} else {
 			$.ajax({
-				url: "http://localhost:3000/register/",
+				url: "/register",
 				method: "post",
 				data: user,
 				success: function (data) {
 					console.log(data)
-					// if (data.status != "true" && data.status != undefined) {
-					// 	alert(data.status);
-					// } else {
-					// 	window.location.href = "http://localhost:3000/"
-					// }
 				},
-
+				error:function(err){
+					console.log(err);
+				}
 			})
 		}
 	}
