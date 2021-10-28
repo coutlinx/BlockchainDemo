@@ -12,8 +12,8 @@ router.post("/", (req, res) => {
   users.passwd = method.Encrypt(users.passwd);
   //对网页传进来的数据处理
 
-  let insert = Readconfig();
-  let registerQuery = insert.login_register[0].insert;
+  let register = Readconfig();
+  let registerQuery = register.DBCONFIG[0].REGISTER;
   //调用json文件来使用sql语句
 
   pool.getConnection((err, connect) => {

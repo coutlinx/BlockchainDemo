@@ -9,4 +9,20 @@ var pool = mysql.createPool({
     queueLimit:8
 });
 
-module.exports = pool;
+let Query = (query,arry,callback)=>{
+    pool.getConnection((err,connect)=>{
+        if (err){
+            console.log(err);
+        }else{
+            connect.query(query,arry,(err,result)=>{
+                if(err){
+                    callback(err)
+                }else{
+                    callback(null,result);
+                }
+            })
+        }
+        connect.release();
+    })
+}
+module.exports = {pool,Query};

@@ -18,7 +18,7 @@ function User(name, phone, passwd) {
 //加密密码
 function Encrypt(passwd) {
   let cipher  = crypto.createCipheriv("aes-128-cbc",password,iv);
-   cipher .update(passwd, "utf8","hex");
+   cipher.update(passwd, "utf8","hex");
   return cipher.final("hex");
 }
 
@@ -29,8 +29,12 @@ function Decode(_passwd) {
   return decipher.final().toString()
 }
 
+function Checkexists(){
+
+}
 module.exports = {
   User,
   Encrypt,
   Decode,
+  Checkexists,
 };

@@ -1,8 +1,9 @@
- 
 {
-    "login_register":[
-        {"insert":"INSERT INTO user (name,passwd,phone) VALUES (?,?,?)"},
-        {"select":"SELECT FROM user WHERE name = ?"}
-        
+    "DBCONFIG": [
+        {
+            "REGISTER": "INSERT INTO user (name,passwd,phone) VALUES (?,?,?)",
+            "QueryRep": "SELECT FROM user WHERE name = ?",
+            "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?"
+        }
     ]
 }
