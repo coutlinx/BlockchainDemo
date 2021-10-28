@@ -152,8 +152,6 @@
     		if(numError){
     			return false;
     		}
-    		alert('登陆成功！')
-
     	});
 		})
 		$("#from").submit(function () {
@@ -168,8 +166,13 @@
 				method: "post",
 				data: user,
 				success: function (data) {
-					console.log(data)
+					if(data){
+						window.location.href="http://localhost:3000/"
+					}
 				},
+				error:function(err){
+					console.log(err);
+				}
 			})
 		}
 	}

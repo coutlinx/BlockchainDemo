@@ -9,31 +9,40 @@ router.get("/", function (req, res, next) {
 });
 router.post("/", (req, res) => {
   let users = method.User(req.body.name, req.body.phone, req.body.password);
+  users.passwd = method.Encrypt(users.passwd);
+  //对网页传进来的数据处理
+
   let insert = Readconfig();
-  console.log(insert.login_register[0].insert);
-  console.log(users);
+  let registerQuery = insert.login_register[0].insert;
+  //调用json文件来使用sql语句
+
   pool.getConnection((err, connect) => {
     if (err) {
       console.log(err);
     } else {
-      connect.query("show databases", (err, results) => {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(results);
+      connect.query(
+        registerQuery,
+        [users.name, users.passwd, users.phone],
+        (err, results) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log(results);
+          }
         }
-      });
+      );
     }
     connect.release();
   });
+  res.redirect("../");
 });
 
-//读取config文件函数
+//读取config文件
 function Readconfig() {
-    let query;
-     query = fs.readFileSync("./config/db.json", "utf-8")
-     query = JSON.parse(query);
-    return query
-  }
+  let query;
+  query = fs.readFileSync("./config/db.json", "utf-8");
+  query = JSON.parse(query);
+  return query;
+}
 
 module.exports = router;
