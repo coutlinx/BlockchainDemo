@@ -1,4 +1,5 @@
 var express = require('express');
+var web3 = require('web3');
 var router = express.Router();
 
 /* GET home page. */

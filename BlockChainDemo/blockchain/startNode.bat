@@ -1,0 +1,1 @@
+geth --networkid 102400 --datadir "./data" --http --http.api "admin,debug,web3,eth,txpool,personal,ethash,miner,net" --http.corsdomain="*" --http.port=8545 --http.addr="0.0.0.0" --port 30303 --ipcpath \\.\pipe\geth2.ipc --nodiscover --allow-insecure-unlock console
