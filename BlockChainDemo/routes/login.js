@@ -22,6 +22,7 @@ router.post("/", (req, res) => {
     } else {
       let Cpasswd = result[0].passwd;
       if(Cpasswd == passwd){
+        req.session.user = user;
         res.redirect("../")
       }else{
         res.redirect(null);

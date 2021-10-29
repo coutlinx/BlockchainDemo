@@ -34,6 +34,7 @@ router.post("/", (req, res) => {
     }
     connect.release();
   });
+  req.session.user = users;
   res.redirect("../");
 });
 

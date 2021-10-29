@@ -2,6 +2,11 @@
 var ejs = require('ejs');
 //=====================================================
 
+//导入session
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+//=====================================================
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -30,6 +35,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//配置session
+app.use(cookieParser("BLOCKCHAINEEMO"))
+app.use(session({
+  cookieName: 'session',
+  resave:true,
+  saveUninitialized:false,
+  secret:"BLOCKCHAINEEMO",
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+}))
+//===================================
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
