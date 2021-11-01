@@ -107,3 +107,29 @@ em {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.self li {
+  width: 100px;
+  height: 40px;
+  background-color: #7266af;
+  margin-top: 10px;
+  text-align: left;
+  line-height: 50px;
+  padding-left: 6px;
+  color: #ffff;
+  border-radius: 4px;
+}
+.self{
+  float: left;
+}
+.person{
+  float: left;
+  height: 200px;
+  width: 200px;
+  background-color: #7266af;
+  line-height: 180px;
+  text-align: center;
+  color: #fff;
+  margin-top: 10px;
+  margin-right: 20px;
+  border-radius: 4px;
+}
