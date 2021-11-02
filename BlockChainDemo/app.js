@@ -37,14 +37,20 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //配置session
+
 app.use(cookieParser("BLOCKCHAINEEMO"))
 app.use(session({
   cookieName: 'session',
   resave:true,
-  saveUninitialized:false,
+  saveUninitialized:true,
   secret:"BLOCKCHAINEEMO",
   duration: 30 * 60 * 1000,
+  rolling:true,
   activeDuration: 5 * 60 * 1000,
+  cookie:{
+    maxAge:60*1000*30,
+    secure:false
+},
 }))
 //===================================
 
