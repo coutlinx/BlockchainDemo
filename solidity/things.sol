@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
-
-contract Thing {
+contract Thing{
     //出价最高事件
     event HighBidEvt_linhao(address bidder, uint256 amount);
 

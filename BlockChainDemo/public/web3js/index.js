@@ -20,13 +20,19 @@ if (typeof window.ethereum !== "undefined") {
           URL: "./",
           type: "POST",
           data: { acc: acc[0], Balance: res },
-          dataType:"json"
+          dataType:"json",
+          sucess:function(data){
+            console.log(data);
+          },
+          error:function(data){
+            console.log(data);
+          }
         });
       }
     });
   }).catch((err) => console.log(err));
 } else {
-  alter("plase install the MetaMask");
+  alert("plase install the MetaMask");
 }
 
 function getAccount(resolve, reject) {
@@ -34,15 +40,6 @@ function getAccount(resolve, reject) {
     .request({ method: "eth_requestAccounts" })
     .then((res) => resolve(res))
     .catch((err) => reject(err));
-
-  //   accNum = accounts.length;
-  //   const account = accounts[0];
-  //   $("#accountAddress").html(account);
-  //   for (let i = 0; i < accNum; i++) {
-  //     $option = `<option>${accounts[i]}</option>`;
-  //     $("#bidAccount").append($option);
-  //     console.log(accounts[i]);
-  //   }
 }
 function getBalance(callback) {
   ethereum

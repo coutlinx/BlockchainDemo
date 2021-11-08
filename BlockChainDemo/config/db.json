@@ -1,8 +1,8 @@
 {
     "DBCONFIG": [
         {
-            "REGISTER": "INSERT INTO user (name,passwd,phone) VALUES (?,?,?)",
-            "QueryRep": "SELECT FROM user WHERE name = ?",
+            "REGISTER": "INSERT INTO user (address) VALUES (?)",
+            "QueryRep": "SELECT * FROM user WHERE address = ? and role = 'user' ",
             "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?"
         }
     ]

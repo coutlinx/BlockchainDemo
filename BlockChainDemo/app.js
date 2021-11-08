@@ -16,12 +16,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var selfRouter = require('./routes/self');
-var loginRouter = require('./routes/login');
 var objRouter = require('./routes/obj');
 var rechargRouter = require('./routes/recharg');
 var tradeRouter = require('./routes/trade');
 var withdrawRouter = require('./routes/withdraw');
-var registerRouter = require('./routes/register');
 var app = express();
 
 // view engine setup
@@ -57,13 +55,12 @@ app.use(session({
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/self', selfRouter);
-app.use('/login',loginRouter);
 app.use('/obj',objRouter);
 app.use('/recharg',rechargRouter);
 app.use('/trade',tradeRouter);
 app.use('/withdraw',withdrawRouter);
 app.use('/recharge',rechargRouter);
-app.use('/register',registerRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,11 +1,11 @@
 
-var mysql = require('mysql');   
+var mysql = require('mysql');
 var pool = mysql.createPool({
     connectionLimit:4,
     host:'',
     user:'root',
     database:'BLD',
-    password:'121',
+    password:'102400',
     queueLimit:8
 });
 
@@ -16,7 +16,7 @@ let Query = (query,arry,callback)=>{
         }else{
             connect.query(query,arry,(err,result)=>{
                 if(err){
-                    callback(err)
+                    callback(err,null);
                 }else{
                     callback(null,result);
                 }
@@ -25,4 +25,19 @@ let Query = (query,arry,callback)=>{
         connect.release();
     })
 }
-module.exports = {pool,Query};
+let Select = (query,callback)=>{
+    pool.getConnection((err,connect)=>{
+        if(err){
+            console.log(err);
+        }else{
+            connect.query(query,(err,result)=>{
+                if(err){
+                    callback(err,null);
+                }else{
+                    callback(null,result);
+                }
+            })
+        }
+    })
+}
+module.exports = {pool,Query,Select};
