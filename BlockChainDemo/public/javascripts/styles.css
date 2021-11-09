@@ -196,8 +196,19 @@ em {
   float: left;
   flex: 1;
   width: 25%;
-  margin-top: 5%;
+  /* margin-top:10px; */
+  margin-bottom: 40px;
   border: 2px #f3f5f9 solid;
   border-radius: 4px;
   box-shadow: 10px 10px 5px #888888;
+}
+#balance{
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+  color: #7266af;
+  font-size: 32px;
+}
+#value{
+  
 }
