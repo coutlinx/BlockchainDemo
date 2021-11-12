@@ -176,6 +176,9 @@ contract Auction {
         );
     }
 
+    function getVlaue(sting memory Hash) view public returns(uint256){
+        return hibest_bid_linhao[Hash];
+    }
     modifier LowerPrice(string memory Hash, uint256 money) {
         require(
             hibest_bid_linhao[Hash] < money,
