@@ -3,4 +3,7 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
     res.render('trade')
   });
+  router.post('/',(req,res)=>{
+    console.log(req.body);
+  })
   module.exports = router;

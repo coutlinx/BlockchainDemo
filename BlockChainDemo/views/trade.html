@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="javascripts/styles.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Trade</title>
 </head>
 
 <body>
@@ -52,15 +55,44 @@
                     <span>HASH:</span>
                 </div>
             </div>
-            <a href="#">
-                <div id="Bottom_box">
-                    <div class="creat">
-                        创建交易
-                    </div>
-                </div>
-            </a>
-
+            <button class="btn btn-primary end" data-toggle="modal" data-target="#addcase">添加用例</button>
             
+            <div id="addcase" class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <form action="http://localhost:3000/trade" role="form" method="post" >
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span></button>
+                                <h4 class="modal-title">添加用例</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="InputCode">商品名</label>
+                                    <input type="text" class="form-control" name="name" placeholder="Model Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputCode">商品价值</label>
+                                    <input type="text" class="form-control" name="value" placeholder="Model Code">
+                                </div>
+                                <div class="form-group">
+                                    <label for="InputCode">字段</label>
+                                    <input type="file" name="photo" id="txt_file" multiple class="file-loading" />
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                                    <button type="submit" class="btn btn-primary">提交</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+                <!-- /.modal -->
+            </div>
         </div>
     </div>
     </div>
