@@ -190,3 +190,13 @@
 21:18:06.897949 version@stat F·[2 1] S·902KiB[778KiB 123KiB] Sc·[0.50 0.00]
 21:18:06.911956 db@janitor F·5 G·0
 21:18:06.912957 db@open done T·26.0103ms
+=============== Nov 14, 2021 (CST) ===============
+19:03:46.336137 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:03:46.337246 version@stat F·[2 1] S·902KiB[778KiB 123KiB] Sc·[0.50 0.00]
+19:03:46.337246 db@open opening
+19:03:46.337790 journal@recovery F·1
+19:03:46.339437 journal@recovery recovering @45
+19:03:46.344058 memdb@flush created L0@47 N·1 S·219B "unc..own,v17560":"unc..own,v17560"
+19:03:46.346302 version@stat F·[3 1] S·902KiB[778KiB 123KiB] Sc·[0.75 0.00]
+19:03:46.357276 db@janitor F·6 G·0
+19:03:46.357822 db@open done T·20.5768ms
