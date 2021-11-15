@@ -3,7 +3,8 @@ pragma solidity ^0.8.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/IERC20.sol";
 
-contract Auction {
+contract Auction{
+    
     struct Admin {
         string name_linhao;
         address Admin_add_linhao;
@@ -24,7 +25,6 @@ contract Auction {
         string objhash_linhao;
         uint256 value_linhao;
     }
-    address ROOT;
     address ERC20_address_linhao;
 
     Admin[] Admins_linhao;
@@ -43,26 +43,31 @@ contract Auction {
     mapping(string => uint256) public starTime_linhao;
     mapping(string => uint256) public endTime_linhao; // 拍卖结束时间
     mapping(string => uint256) public Aution_value_linhao;
-    mapping(string => uint256) public hibest_bid_linhao;
-    mapping(string => address) public hibest_bider_linhao; //最高出价
-
+    mapping(string =>uint256) public hibest_bid_linhao;
+    mapping(string=>address) public hibest_bider_linhao; //最高出价
+    
     constructor(address ERC20_address) {
         ERC20_address_linhao = ERC20_address;
-        ROOT = msg.sender;
+       Admin memory ROOT = Admin({
+            name_linhao:"ROOT",
+            Admin_add_linhao:msg.sender,
+            ID : 0
+        });
+        Admins_linhao.push(ROOT);
     }
 
     //竞拍函数
-    function ObjBit(string memory Hash, uint256 money)
+    function ObjBit(string memory Hash,uint256 money)
         public
         IsEnding(Hash)
-        LowerPrice(Hash, money)
-        Enough_Token(IERC20(ERC20_address_linhao).balanceOf(msg.sender), money)
+        LowerPrice(Hash,money)
+        Enough_Token(IERC20(ERC20_address_linhao).balanceOf(msg.sender),money)
     {
         hibest_bid_linhao[Hash] = money;
         hibest_bider_linhao[Hash] = msg.sender;
         emit HighBidEvt_linhao(msg.sender, money);
     }
-
+ 
     function StartAution(string memory Hash) public OnlyAdmin {
         starTime_linhao[Hash] = block.timestamp;
         startFlg_linhao[Hash] = true;
@@ -88,7 +93,7 @@ contract Auction {
     function lookValue(string memory Hash) public view returns (uint256) {
         return values_linhao[Hash];
     }
-
+    
     function changeValue(string memory Hash, uint256 value)
         public
         OnlyOwner(Hash)
@@ -123,6 +128,18 @@ contract Auction {
         Admins_linhao[ID].ID = ID;
         return ID;
     }
+    
+    function SetExpre(address Expert_addr,string memory Expert_name)public OnlyAdmin returns(uint256){
+        Expert memory expert = Expert({
+            name_linhao:Expert_name,
+            Expert_add_linhao:Expert_addr,
+            ID:0
+        });
+        Experts_linhao.push(expert);
+        uint256 ID  =Experts_linhao.length-1;
+        Experts_linhao[ID].ID = ID;
+        return ID;
+    }
 
     function SetOwner(string memory OwnerName, address Owner_addr)
         public
@@ -144,7 +161,7 @@ contract Auction {
         string memory Hash,
         uint256 endTime,
         uint256 money
-    ) public OnlyAdmin {
+    ) public  {
         auction memory auc = auction({
             owner_linhao: msg.sender,
             objhash_linhao: Hash,
@@ -155,31 +172,21 @@ contract Auction {
         ObjMap_linhao[msg.sender].push(Hash);
         endTime_linhao[Hash] = endTime;
     }
-
+    
     //ERC20==============================
     function Get_Contract_Balance() public view returns (uint256) {
         return (IERC20(ERC20_address_linhao).balanceOf(address(this)));
     }
-
-    function Pay_value(string memory Hash) public OnlyBuyer(Hash) {
-        IERC20(ERC20_address_linhao).transferFrom(
-            msg.sender,
-            address(this),
-            Aution_value_linhao[Hash]
-        );
+    
+    function Pay_value(string memory Hash)public OnlyBuyer(Hash){
+        IERC20(ERC20_address_linhao).transferFrom(msg.sender,address(this),Aution_value_linhao[Hash]);
     }
-
-    function withdraw(string memory Hash) public OnlyOwner(Hash) {
-        IERC20(ERC20_address_linhao).transfer(
-            msg.sender,
-            Aution_value_linhao[Hash]
-        );
+        
+    function withdraw(string memory Hash)public OnlyOwner(Hash){
+        IERC20(ERC20_address_linhao).transfer(msg.sender,Aution_value_linhao[Hash]);
     }
-
-    function getVlaue(sting memory Hash) view public returns(uint256){
-        return hibest_bid_linhao[Hash];
-    }
-    modifier LowerPrice(string memory Hash, uint256 money) {
+    
+      modifier LowerPrice(string memory Hash,uint256 money) {
         require(
             hibest_bid_linhao[Hash] < money,
             "Your bid is lower than the low price"
@@ -218,19 +225,16 @@ contract Auction {
         );
         _;
     }
-    modifier Enough_Token(uint256 Token, uint256 value) {
-        require(value < Token, "your have not enough money to pay that!");
+    modifier Enough_Token(uint256 Token,uint256 value){
+        require(value<Token,"your have not enough money to pay that!");
         _;
     }
-    modifier OnlyBuyer(string memory Hash) {
-        require(
-            hibest_bider_linhao[Hash] == msg.sender,
-            "your are not the buyer"
-        );
+    modifier OnlyBuyer(string memory Hash){
+        require(hibest_bider_linhao[Hash] == msg.sender,"your are not the buyer");
         _;
     }
-
-    //出价最高事件
+    
+     //出价最高事件
     event HighBidEvt_linhao(address bidder, uint256 amount);
 
     //拍卖开始事件
@@ -244,7 +248,7 @@ contract Auction {
 
     //估价完成事件
     event Valuation_Over_linhao(string Hash, uint256 value);
-
+    
     //客户接受或更改估价
     event Owner_SetValue(string Hash);
 }
