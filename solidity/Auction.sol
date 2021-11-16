@@ -39,7 +39,6 @@ contract Auction{
     mapping(address => uint256) public ExpertMap_linhao;
     mapping(string => uint256) public values_linhao;
     mapping(string => bool) public startFlg_linhao;
-    mapping(string => bool) public endFlg_linhao;
     mapping(string => uint256) public starTime_linhao;
     mapping(string => uint256) public endTime_linhao; // 拍卖结束时间
     mapping(string => uint256) public Aution_value_linhao;
@@ -71,19 +70,16 @@ contract Auction{
     function StartAution(string memory Hash) public OnlyAdmin {
         starTime_linhao[Hash] = block.timestamp;
         startFlg_linhao[Hash] = true;
-        endFlg_linhao[Hash] = false;
+        hibest_bid_linhao[Hash] = Aution_value_linhao[Hash];
         emit AuctionStartEvt_linhao(Hash);
     }
 
-    function EndingAuthion(string memory Hash) public OnlyAdmin returns (bool) {
-        if (starTime_linhao[Hash] - block.timestamp == endTime_linhao[Hash]) {
-            endFlg_linhao[Hash] = true;
+    function EndingAuthion(string memory Hash) public OnlyAdmin {
+        require(starTime_linhao[Hash] - uint256(block.timestamp) >= 5 seconds,"it not ending!");
             startFlg_linhao[Hash] = false;
-            return true;
-        } else {
-            return false;
+            starTime_linhao[Hash] = 0;
         }
-    }
+    
 
     function valuation(string memory Hash, uint256 value) public OnlyExpert {
         values_linhao[Hash] = value;
@@ -99,6 +95,7 @@ contract Auction{
         OnlyOwner(Hash)
     {
         auctions_linhao[OBJ_linhao[Hash]].value_linhao = value;
+        Aution_value_linhao[Hash] = value;
         emit Owner_SetValue(Hash);
     }
 
@@ -126,6 +123,7 @@ contract Auction{
         Admins_linhao.push(setAdmin);
         uint256 ID = Admins_linhao.length - 1;
         Admins_linhao[ID].ID = ID;
+        AdminMap_linhao[Admin_addr] = ID;
         return ID;
     }
     
@@ -138,6 +136,7 @@ contract Auction{
         Experts_linhao.push(expert);
         uint256 ID  =Experts_linhao.length-1;
         Experts_linhao[ID].ID = ID;
+        ExpertMap_linhao[Expert_addr] = ID;
         return ID;
     }
 
@@ -154,12 +153,12 @@ contract Auction{
         Owners_linhao.push(owner);
         uint256 ID = Owners_linhao.length - 1;
         Owners_linhao[ID].ID = ID;
+        OwnerMap_linhao[Owner_addr] = ID;
         return ID;
     }
 
     function SetAution(
         string memory Hash,
-        uint256 endTime,
         uint256 money
     ) public  {
         auction memory auc = auction({
@@ -170,7 +169,6 @@ contract Auction{
         auctions_linhao.push(auc);
         OBJ_linhao[Hash] = auctions_linhao.length - 1;
         ObjMap_linhao[msg.sender].push(Hash);
-        endTime_linhao[Hash] = endTime;
     }
     
     //ERC20==============================
@@ -186,7 +184,7 @@ contract Auction{
         IERC20(ERC20_address_linhao).transfer(msg.sender,Aution_value_linhao[Hash]);
     }
     
-      modifier LowerPrice(string memory Hash,uint256 money) {
+     modifier LowerPrice(string memory Hash,uint256 money) {
         require(
             hibest_bid_linhao[Hash] < money,
             "Your bid is lower than the low price"
@@ -196,7 +194,7 @@ contract Auction{
 
     modifier IsEnding(string memory Hash) {
         require(
-            endFlg_linhao[Hash] && !startFlg_linhao[Hash],
+           startFlg_linhao[Hash],
             "the authion is ending"
         );
         _;
