@@ -75,7 +75,7 @@ contract Auction{
     }
 
     function EndingAuthion(string memory Hash) public OnlyAdmin {
-        require(starTime_linhao[Hash] - uint256(block.timestamp) >= 5 seconds,"it not ending!");
+        require(block.timestamp - starTime_linhao[Hash]>= 60 seconds,"it not ending!");
             startFlg_linhao[Hash] = false;
             starTime_linhao[Hash] = 0;
         }
