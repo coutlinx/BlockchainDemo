@@ -1,10 +1,12 @@
 var express = require('express');
 var pool = require("../config/dbConfig");
 var fs = require("fs");
+var web3 = require("../Web3js/middle");
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log(web3.Getaccout());
   res.render('index', { title: 'Express' });
 });
 router.post('/',(req,res)=>{

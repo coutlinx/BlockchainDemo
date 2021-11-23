@@ -4,66 +4,128 @@ var authion = '0x8FF0f5614e3067a09F58310f01EcafA08468E4a7'
 
 var Web3 = require("web3");
 var fs = require('fs');
-var authionData =fs.readFileSync("./ABI/authion.json","utf-8");  
-var tokenDate = fs.readFileSync("./ABI/Token.json","utf-8");
+var authionData =fs.readFileSync("Web3js/ABI/authion.json","utf-8");  
+var tokenDate = fs.readFileSync("Web3js/ABI/Token.json","utf-8");
 //连接到Ganache 
 var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
 var authionContract = new web3.eth.Contract(JSON.parse(authionData),authion)
 var tokenContract = new web3.eth.Contract(JSON.parse(tokenDate),token);
-async function Getaccount(){
+async function Getaccout(){
     return (await web3.eth.getAccounts())[0]
 }
 async function call(){
-    console.log(await(MyAuctions()))
+    console.log(await(Getaccout()))
 }
-async function MyAuctions(){
-    const account = await Getaccount();
+async function MyAuctions(callAdd){
     const str = await authionContract.methods.MyAuctions().call({
-        from:account,
+        from:callAdd,
     });
     return str;
 }
 call()
 
-async function ObjBit(Hash,value){
-    const account = await Getaccount();
+async function ObjBit(callAdd,Hash,value){
+     
     const promise = await authionContract.methods.ObjBit(Hash,value).send({
-        from:account
+        from:callAdd
     }); 
     return promise;
 }
 
-async function StartAution(Hash){
-    const account = await Getaccount();
+async function StartAution(callAdd,Hash){
+     
     const promise = await authionContract.methods.StartAution(Hash).send({
-        from:account
+        from:callAdd
     })
     return promise
 }
 
-async function EndingAuthion(Hash){
-    const account = await Getaccount();
+async function EndingAuthion(callAdd,Hash){
+     
     const promise = await authionContract.methods.EndingAuthion(Hash).send({
-        from:account
+        from:callAdd
     });
     return promise  
 }
 
-async function valuation(Hash,value){
-    const account = await Getaccount();
+async function valuation(callAdd,Hash,value){
+     
     const promise = await authionContract.methods.valuation(Hash,value).send({
-        from:account
+        from:callAdd
     });
     return promise;
 }
 
-async function lookValue(Hash){
-    const account = await Getaccount();
-    const promise = await authionContract.methods.lookValue(Hash).call();
+async function lookValue(callAdd,Hash){
+    const promise = await authionContract.methods.lookValue(Hash).call({
+        from:callAdd
+    });
     return promise;
 }
 
-async function 
+async function ChangeValue(callAdd,Hash,value){
+    const promise = await  authionContract.methods.changeValue().send({
+        from:callAdd
+    });
+    return promise;
+}
+
+async function OwenrChange(callAdd,Hash){
+    const promise = await authionContract.methods.OwenrChange().send({
+        from:callAdd
+    });
+}
+ 
+async function SetAdmin(callAdd,Admin_addr,Admin_name){
+    const promise = await authionContract.methods.SetAdmin(Admin_addr,Admin_name).send({
+        from:callAdd
+    });
+    return promise;
+}
+
+async function SetExpre(callAdd,Expert_addr,Expert_name){
+    const promise = await authionContract.methods.SetExpre(Expert_addr,Expert_name).send({
+        from:callAdd
+    });
+    return promise
+}
+
+async function SetOwner(callAdd,OwnerName,Owner_addr){
+    const promise = authionContract.methods.SetOwner(OwnerName,Owner_addr).send({
+        from:callAdd
+    });
+    return promise;
+}
+
+async function SetAution(callAdd,Hash,value){
+    const promise = authionContract.methods.SetAution(Hash,value).send({
+        from:callAdd
+    });
+    return promise
+}
+
+async function Get_Contract_Balance(){
+    const account = await Getaccout();
+    const promise = authionContract.methods.Get_Contract_Balance().call({
+        from:account
+    }
+    );
+}
+
+async function Pay_value(callAdd,Hash){
+    const promise = authionContract.methods.Pay_value(Hash).send({
+        from:callAdd
+    });
+    return promise;
+}
+
+async function withdraw(callAdd,Hash){
+    const promise = authionContract.methods.withdraw(Hash).send({
+        from:callAdd
+    });
+    return promise;
+}
+
 // var ObjBit = authionContract.methods.ObjBit().call();
 //     console.log(ObjBit)
 // var StartAution = authionContract.methods.StartAution();
@@ -83,6 +145,7 @@ async function
 
 // console.log(OBJ_linhao);
 
+module.exports = {Getaccout,}
 
 
 
