@@ -1,4 +1,5 @@
 var crypto = require("crypto");
+var fs = require("fs");
 
 //加密用的key和向量
 const password = "FnJL7EDzjqWjcaY9";
@@ -29,12 +30,20 @@ function Decode(_passwd) {
   return decipher.final().toString()
 }
 
-function Checkexists(){
+function TurnintoHash(){
+  
+}
 
+async function Readconfig() {
+  let query;
+  query =fs.readFileSync("./config/db.json", "utf-8");
+  query = JSON.parse(query);
+  return query;
 }
 module.exports = {
   User,
   Encrypt,
   Decode,
-  Checkexists,
+  TurnintoHash,
+  Readconfig,
 };

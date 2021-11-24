@@ -10,7 +10,7 @@
 
 
 
-### 3.注册登录:https://github.com/lynachen/zhihu_login
+### 3.注册更多:https://github.com/lynachen/zhihu_login
 
 ## 合约的内容
 > 区块链集成的拍卖系统

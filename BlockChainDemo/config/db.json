@@ -3,7 +3,8 @@
         {
             "REGISTER": "INSERT INTO user (address) VALUES (?)",
             "QueryRep": "SELECT * FROM user WHERE address = ? and role = 'user' ",
-            "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?"
+            "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?",
+            "IDENTITY":"Select role from user where address= ?"
         }
     ]
 }
