@@ -1,6 +1,6 @@
 var crypto = require("crypto");
 var fs = require("fs");
-
+var mid = require("../Web3js/middle")
 //加密用的key和向量
 const password = "FnJL7EDzjqWjcaY9";
 const iv = "FnJL7EDzjqWjcaY9";
@@ -40,10 +40,14 @@ async function Readconfig() {
   query = JSON.parse(query);
   return query;
 }
+async function GetTokenBalance(address){
+  return mid.GetTokenBalance(address)
+}
 module.exports = {
   User,
   Encrypt,
   Decode,
   TurnintoHash,
   Readconfig,
+  GetTokenBalance
 };

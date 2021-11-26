@@ -1,3 +1,19 @@
+ethereum.on('accountsChanged', function (accounts) {
+  console.log(accounts[0])
+  $.ajax({
+    URL: './',
+    type: 'POST',
+    data: { acc: accounts[0]},
+    dataType: 'json',
+    sucess: function (data) {
+      console.log(data)
+      // location.reload(true);
+    },
+    error: function (data) {
+      console.log(data)
+    },
+  })
+})
 if (typeof window.ethereum !== 'undefined') {
   console.log('MetaMask is installed!')
   var p1 = new Promise(getAccount)
@@ -23,7 +39,7 @@ if (typeof window.ethereum !== 'undefined') {
           dataType: 'json',
           sucess: function (data) {
             console.log(data)
-            location.reload();
+            // location.reload(true);
           },
           error: function (data) {
             console.log(data)

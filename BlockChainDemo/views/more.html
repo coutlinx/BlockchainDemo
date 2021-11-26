@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="javascripts/styles.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <title>Document</title>
 </head>
 
@@ -39,7 +40,69 @@
                 </div>
             </div>
             <div class="contant" style="margin-left: 20%; width: 60%; margin-top: 10%;">
-                <form class="form-horizontal" action="http://localhost:3000/more/setIdentity" method="post">
+                <div class="mainOBJ" style="width:45%;">
+                    <img
+                        src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
+                    <span>HASH:</span>
+                    <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">开始</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+<script src="web3js/index.js"></script>
+<script src="web3js/web3.min.js"></script>
+
+<script>
+    var identity = document.getElementById("value").value
+    if (identity == "admin") {
+
+
+    } else if (identity == "user") {
+
+        // $('.main_content').append(`<div class="jumbotron">
+        //         <h1>还在筹备中...</h1>
+        //         <p>请等待我们的更新</p>
+        //         <p><a class="btn btn-primary btn-lg" href="/" role="button">返回</a></p>
+        //       </div>`)
+    } else {
+
+    }
+    function startAuthion(e) {
+        // console.log(e)
+        $('.active').removeClass("active")
+        e.classList.add("active")
+        $(".contant").html("")
+        $(".contant").append(`<div class="mainOBJ" style="width:45%;">
+                    <img
+                        src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
+                    <span>HASH:</span>
+                    <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">开始</button>
+                    
+                </div>`)
+    }
+    function EndAuthion(e) {
+        console.log(2)
+        $('.active').removeClass("active")
+        e.classList.add("active")
+        $(".contant").html("")
+        $(".contant").append(`<div class="mainOBJ" style="width:45%;">
+                    <img
+                        src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
+                    <span>HASH:</span>
+                    <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">结束</button>
+                    
+                </div>`)
+    }
+    function setIdentity(e) {
+        console.log(3)
+        $('.active').removeClass("active")
+        e.classList.add("active")
+        $(".contant").html("")
+        $(".contant").append(`<form class="form-horizontal" action="http://localhost:3000/more/setIdentity" method="post">
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">地址</label>
                         <div class="col-sm-10">
@@ -66,62 +129,7 @@
                                 <button type="submit" class="btn btn-default">Sign in</button>
                             </div>
                         </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
-
-</body>
-<script src="web3js/index.js"></script>
-<script src="web3js/web3.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script>
-    var identity = document.getElementById("value").value
-    if (identity == "admin") {
-
-
-    } else if (identity == "user") {
-
-        // $('.main_content').append(`<div class="jumbotron">
-        //         <h1>还在筹备中...</h1>
-        //         <p>请等待我们的更新</p>
-        //         <p><a class="btn btn-primary btn-lg" href="/" role="button">返回</a></p>
-        //       </div>`)
-    } else {
-
-    }
-    function startAuthion(e) {
-        // console.log(e)
-        $('.active').removeClass("active")
-        e.classList.add("active")
-        $(".contant").html("")
-        $(".contant").append(`<div class="mainOBJ">
-                    <img
-                        src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
-                    <span>HASH:</span>
-                    <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">开始</button>
-                    
-                </div>`)
-    }
-    function EndAuthion(e) {
-        console.log(2)
-        $('.active').removeClass("active")
-        e.classList.add("active")
-        $(".contant").html("")
-        $(".contant").append(`<div class="mainOBJ">
-                    <img
-                        src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
-                    <span>HASH:</span>
-                    <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">结束</button>
-                    
-                </div>`)
-    }
-    function setIdentity(e) {
-        console.log(3)
-        $('.active').removeClass("active")
-        e.classList.add("active")
-
+                </form>`)
     }
 </script>
 

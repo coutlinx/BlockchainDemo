@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
         console.log(identity)
       }
     })
+    res.redirect("/")
   })
   router.post("/setIdentity",(req,res)=>{
     console.log(req.body);

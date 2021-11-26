@@ -4,8 +4,8 @@ var authion = '0x8FF0f5614e3067a09F58310f01EcafA08468E4a7'
 
 var Web3 = require('web3')
 var fs = require('fs')
-var authionData = fs.readFileSync('Web3js/ABI/authion.json', 'utf-8')
-var tokenDate = fs.readFileSync('Web3js/ABI/Token.json', 'utf-8')
+var authionData = fs.readFileSync('C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\authion.json', 'utf-8')
+var tokenDate = fs.readFileSync('C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\Token.json', 'utf-8')
 //连接到Ganache
 var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'))
 var authionContract = new web3.eth.Contract(JSON.parse(authionData), authion)
@@ -122,6 +122,13 @@ async function withdraw(callAdd, Hash) {
   return promise
 }
 
+async function GetTokenBalance(callAdd){
+  const promise = tokenContract.methods.balanceOf(callAdd).call({
+    from:callAdd
+  })
+  return promise
+}
+
 // var ObjBit = authionContract.methods.ObjBit().call();
 //     console.log(ObjBit)
 // var StartAution = authionContract.methods.StartAution();
@@ -158,4 +165,5 @@ module.exports = {
   Get_Contract_Balance,
   Pay_value,
   withdraw,
+  GetTokenBalance
 }
