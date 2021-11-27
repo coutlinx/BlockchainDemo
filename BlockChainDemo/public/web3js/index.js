@@ -73,3 +73,18 @@ function getBalance(callback) {
       callback(error, null)
     })
 }
+
+function recharge(value){
+  $.ajax({
+    URL: './value',
+          type: 'POST',
+          data: { acc: acc[0], Balance: value },
+          dataType: 'json',
+          sucess: function(data){
+            console.log(data)
+          },
+          error: function(data){
+            console.log(data)
+          }
+  })
+}

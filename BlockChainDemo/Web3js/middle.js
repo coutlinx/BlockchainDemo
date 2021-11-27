@@ -129,6 +129,10 @@ async function GetTokenBalance(callAdd){
   return promise
 }
 
+async function RechargeToken(callAdd,value){
+  const promise = tokenContract.methods.
+}
+
 // var ObjBit = authionContract.methods.ObjBit().call();
 //     console.log(ObjBit)
 // var StartAution = authionContract.methods.StartAution();
