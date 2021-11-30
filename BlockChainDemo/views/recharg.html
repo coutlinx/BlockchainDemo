@@ -30,47 +30,47 @@
                 您的余额:<span><%=Token%>LINX</span>
             </div>
             <hr>
-            <div class="obj">
+            <div class="obj" onclick="recharge(this)">
                     <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
                     <span>1YUAN</span>
             </div>
-            <div class="obj">
+            <div class="obj" onclick="recharge(this)">
             
                     <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
                     <span>6YUAN</span>
 
             </div>
-            <div class="obj">
+            <div class="obj" onclick="recharge(this)">
 
                     <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
                     <span>18YUAN</span>
 
             </div>
-            <div class="obj">
+            <div class="obj" onclick="recharge(this)">
 
                 <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
                 <span>30YUAN</span>
 
         </div>
-        <div class="obj">
+        <div class="obj" onclick="recharge(this)">
 
             <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
             <span>68YUAN</span>
 
     </div>
-    <div class="obj">
+    <div class="obj" onclick="recharge(this)">
 
         <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
         <span>128YUAN</span>
 
 </div>
-<div class="obj">
+<div class="obj" onclick="recharge(this)">
 
     <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
     <span>328YUAN</span>
 
 </div>
-<div class="obj">
+<div class="obj" onclick="recharge(this)">
 
     <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
     <span>648YUAN</span>
@@ -85,6 +85,24 @@
 <script src="web3js/web3.min.js"></script>
 
 <script>
-    console
+    async function recharge(e){
+        value = $(e).children()[1].innerHTML
+        console.log(value.split("YUAN")[0])
+        acc = await ethereum.request({ method: 'eth_requestAccounts'})
+        value =  value.split("YUAN")[0]
+        console.log(acc[0],value)
+        $.ajax({
+        type: 'POST',
+        url: "http://localhost:3000/recharge/values",
+          data: { acc: acc[0], Balance:value },
+          dataType: 'json',
+          sucess:function(data){
+            console.log(data)
+          },
+          error:function(data){
+            console.log(data)
+          }
+        })
+  }
 </script>
 </html>

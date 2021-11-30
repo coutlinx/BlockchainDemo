@@ -1,63 +1,66 @@
-ethereum.on('accountsChanged', function (accounts) {
-  console.log(accounts[0])
-  $.ajax({
-    URL: './',
-    type: 'POST',
-    data: { acc: accounts[0]},
-    dataType: 'json',
-    sucess: function (data) {
-      console.log(data)
-      // location.reload(true);
-    },
-    error: function (data) {
-      console.log(data)
-    },
-  })
-})
+// ethereum.on('accountsChanged', function (accounts) {
+//   console.log(accounts[0])
+//   $.ajax({
+//     URL: './',
+//     type: 'POST',
+//     data: { acc: accounts[0]},
+//     dataType: 'json',
+//     sucess: function (data) {
+//       console.log(data)
+//       // location.reload(true);
+//     },
+//     error: function (data) {
+//       console.log(data)
+//     },
+//   })
+// })
 if (typeof window.ethereum !== 'undefined') {
   console.log('MetaMask is installed!')
-  var p1 = new Promise(getAccount)
-  p1.then((acc) => {
-    accounts = acc
-    accNum = acc.length
-    $('#accountAddress').html(acc[0])
-    for (let i = 0; i < accNum; i++) {
-      $option = `<option>${acc[i]}</option>`
-      $('#bidAccount').append($option)
-      console.log(acc[i])
-    }
-    getBalance((err, res) => {
-      if (err) {
-        console.log(err)
-      } else {
-        $('#accountBalance').html(parseInt(res / Math.pow(10, 18)) + 'ETH')
-        console.log(res)
-        $.ajax({
-          URL: './',
-          type: 'POST',
-          data: { acc: acc[0], Balance: res },
-          dataType: 'json',
-          sucess: function (data) {
-            console.log(data)
-            // location.reload(true);
-          },
-          error: function (data) {
-            console.log(data)
-          },
-        })
-      }
-      
-    })
-  }).catch((err) => console.log(err))
+  let acc=  getAccount()
+  console.log(acc)
 } else {
   alert('plase install the MetaMask')
 }
 
+// var p1 = new Promise(getAccount)
+//   p1.then((acc) => {
+//     accounts = acc
+//     accNum = acc.length
+//     $('#accountAddress').html(acc[0])
+//     for (let i = 0; i < accNum; i++) {
+//       $option = `<option>${acc[i]}</option>`
+//       $('#bidAccount').append($option)
+//       console.log(acc[i])
+//     }
+//     getBalance((err, res) => {
+//       if (err) {
+//         console.log(err)
+//       } else {
+//         $('#accountBalance').html(parseInt(res / Math.pow(10, 18)) + 'ETH')
+//         console.log(res)
+//         $.ajax({
+//           URL: './',
+//           type: 'POST',
+//           data: { acc: acc[0], Balance: res },
+//           dataType: 'json',
+//           sucess: function (data) {
+//             console.log(data)
+//             // location.reload(true);
+//           },
+//           error: function (data) {
+//             console.log(data)
+//           },
+//         })
+//       }
+      
+//     })
+//   }).catch((err) => console.log(err))
+
 function getAccount(resolve, reject) {
   ethereum
     .request({ method: 'eth_requestAccounts' })
-    .then((res) => resolve(res))
-    .catch((err) => reject(err))
+    .then((res) => {return res})
+    .catch((err) => {return err})
 }
 
 function getBalance(callback) {
@@ -72,19 +75,4 @@ function getBalance(callback) {
     .catch((error) => {
       callback(error, null)
     })
-}
-
-function recharge(value){
-  $.ajax({
-    URL: './value',
-          type: 'POST',
-          data: { acc: acc[0], Balance: value },
-          dataType: 'json',
-          sucess: function(data){
-            console.log(data)
-          },
-          error: function(data){
-            console.log(data)
-          }
-  })
 }

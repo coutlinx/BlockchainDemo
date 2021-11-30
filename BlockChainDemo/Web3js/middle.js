@@ -11,7 +11,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'))
 var authionContract = new web3.eth.Contract(JSON.parse(authionData), authion)
 var tokenContract = new web3.eth.Contract(JSON.parse(tokenDate), token)
 async function Getaccout() {
-  return (await web3.eth.getAccounts())[0]
+  return (web3.eth.getAccounts())
 }
 async function call() {
   console.log(await Getaccout())
@@ -104,7 +104,7 @@ async function SetAution(callAdd, Hash, value) {
 async function Get_Contract_Balance() {
   const account = await Getaccout()
   const promise = authionContract.methods.Get_Contract_Balance().call({
-    from: account,
+    from: account[0],
   })
 }
 
@@ -130,7 +130,11 @@ async function GetTokenBalance(callAdd){
 }
 
 async function RechargeToken(callAdd,value){
-  const promise = tokenContract.methods.
+  const account = await web3.eth.getAccounts()
+  const promise = tokenContract.methods.transfer(callAdd,BigInt(value*(10**18))).send({
+    from:account[0]
+  })
+  return promise
 }
 
 // var ObjBit = authionContract.methods.ObjBit().call();
@@ -169,5 +173,6 @@ module.exports = {
   Get_Contract_Balance,
   Pay_value,
   withdraw,
-  GetTokenBalance
+  GetTokenBalance,
+  RechargeToken
 }

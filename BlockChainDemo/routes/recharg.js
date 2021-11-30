@@ -13,11 +13,15 @@ router.get('/',async function(req, res, next) {
   }
  
   });
-  router.post('/',(req,res)=>{
-    console.log(req.body);
-    account = req.body.acc;
+  router.post('/values',(req,res)=>{
+    console.log(req.body.acc,req.body.Balance)
+    middle.RechargeToken(req.body.acc,req.body.Balance).then(console.log)
+    res.redirect("/")
   })
-  router.post('/value',(req,res)=>{
-    middle.
-  })
+  // router.post('/',(req,res)=>{
+  //   console.log(req.body);
+  //   account = req.body.acc;
+  // })
+  
+ 
   module.exports = router;
