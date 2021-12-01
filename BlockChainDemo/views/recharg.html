@@ -7,7 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="javascripts/styles.css">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <link rel="stylesheet" href="javascripts/styles.css">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="javascripts/jquery-1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
     <title>Document</title>
 </head>
 
@@ -26,83 +38,74 @@
             </ul>
         </div>
         <div class="main_content">
+
             <div id="balance">
-                您的余额:<span><%=Token%>LINX</span>
+                您的余额:<span>
+                    <%=Token%>LINX
+                </span>
             </div>
             <hr>
             <div class="obj" onclick="recharge(this)">
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-                    <span>1YUAN</span>
-            </div>
-            <div class="obj" onclick="recharge(this)">
-            
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-                    <span>6YUAN</span>
-
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>1YUAN</span>
             </div>
             <div class="obj" onclick="recharge(this)">
 
-                    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-                    <span>18YUAN</span>
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>6YUAN</span>
 
             </div>
             <div class="obj" onclick="recharge(this)">
 
-                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>18YUAN</span>
+
+            </div>
+            <div class="obj" onclick="recharge(this)">
+
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
                 <span>30YUAN</span>
 
+            </div>
+            <div class="obj" onclick="recharge(this)">
+
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>68YUAN</span>
+
+            </div>
+            <div class="obj" onclick="recharge(this)">
+
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>128YUAN</span>
+
+            </div>
+            <div class="obj" onclick="recharge(this)">
+
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>328YUAN</span>
+
+            </div>
+            <div class="obj" onclick="recharge(this)">
+
+                <img
+                    src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
+                <span>648YUAN</span>
+
+            </div>
         </div>
-        <div class="obj" onclick="recharge(this)">
-
-            <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-            <span>68YUAN</span>
-
-    </div>
-    <div class="obj" onclick="recharge(this)">
-
-        <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-        <span>128YUAN</span>
-
-</div>
-<div class="obj" onclick="recharge(this)">
-
-    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-    <span>328YUAN</span>
-
-</div>
-<div class="obj" onclick="recharge(this)">
-
-    <img src="https://cloudfront-us-east-1.images.arcpublishing.com/coindesk/GEGQA7G5QRGX3KTLNN7WK3ICEQ.jpg">
-    <span>648YUAN</span>
-
-</div>
-        </div>
     </div>
     </div>
-
+    <div id="res"></div>
 </body>
-<script src="web3js/index.js"></script>
-<script src="web3js/web3.min.js"></script>
 
-<script>
-    async function recharge(e){
-        value = $(e).children()[1].innerHTML
-        console.log(value.split("YUAN")[0])
-        acc = await ethereum.request({ method: 'eth_requestAccounts'})
-        value =  value.split("YUAN")[0]
-        console.log(acc[0],value)
-        $.ajax({
-        type: 'POST',
-        url: "http://localhost:3000/recharge/values",
-          data: { acc: acc[0], Balance:value },
-          dataType: 'json',
-          sucess:function(data){
-            console.log(data)
-          },
-          error:function(data){
-            console.log(data)
-          }
-        })
-  }
-</script>
+<script src="web3js/web3.min.js"></script>
+<script src="web3js/recharge.js"></script>
+
 </html>

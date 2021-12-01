@@ -153,7 +153,6 @@ async function RechargeToken(callAdd,value){
 // var Pay_value = authionContract.methods.Pay_value();
 // var withdraw = authionContract.methods.withdraw();
 // var OBJ_linhao = authionContract.methods.OBJ_linhao();
-
 // console.log(OBJ_linhao);
 
 module.exports = {
