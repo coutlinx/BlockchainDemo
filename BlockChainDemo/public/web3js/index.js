@@ -9,14 +9,14 @@ if (typeof window.ethereum !== 'undefined') {
       $('#accountAddress').html(Account)
       $option = `<option>${Account}</option>`
       $('#bidAccount').append($option)
-      $('#accountBalance').html(parseInt(Balance / Math.pow(10, 18)) + 'LINX')
-      $.ajax({
+      
+      $.ajax({  
         type: 'POST',
         url: 'http://localhost:3000/',
-        data: { acc: Account, Balance: Balance },
+        data: { acc: Account},
         dataType: 'json',
-        sucess: function (data) {
-          console.log(data)
+        success: function (data) {
+          $('#accountBalance').html(parseInt(data.token / Math.pow(10, 18)) + 'LINX')
         },
         error: function (data) {
           console.log(data)
@@ -34,3 +34,21 @@ function getBalance(acc) {
   Account = acc
   return ethereum.request({ method: 'eth_getBalance', params: [acc, 'latest'] })
 }
+
+ethereum.on('accountsChanged', function (accounts) {
+  $.ajax({  
+    type: 'POST',
+    url: 'http://localhost:3000/',
+    data: { acc: accounts[0]},
+    dataType: 'json',
+    success: function (data) {
+      $('#accountAddress').html(accounts[0])
+      $option = `<option>${accounts[0]}</option>`
+      $('#bidAccount').append($option)
+      $('#accountBalance').html(parseInt(data.token / Math.pow(10, 18)) + 'LINX')
+    },
+    error: function (data) {
+      console.log(data)
+    },
+  })
+})

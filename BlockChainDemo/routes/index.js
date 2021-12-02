@@ -1,6 +1,6 @@
 var express = require('express')
 var pool = require('../config/dbConfig')
-var web3 = require('../Web3js/middle')
+var middle = require('../Web3js/middle')
 var router = express.Router()
 var method = require('../config/methodConfig')
 /* GET home page. */
@@ -11,21 +11,27 @@ router.post('/', async (req, res) => {
   acc = req.body.acc;
   console.log(req.body)
   insert = await method.Readconfig();
-  pool.Query(insert.DBCONFIG[0].QueryRep, [acc], (err, res) => {
+  token = await middle.GetTokenBalance(acc);
+  pool.Query(insert.DBCONFIG[0].QueryRep, [acc], (err, result) => {
     if (err) {
       console.log(err)
-    } else if (res.length > 0) {
+    } else if (result.length > 0) {
       console.log('sucess!')
+      res.json({token:token})
     } else {
-      pool.Query(insert.DBCONFIG[0].REGISTER, [acc], (err, res) => {
+      pool.Query(insert.DBCONFIG[0].REGISTER, [acc], (err, result) => {
         if (err) {
           console.log(err)
         } else {
-          console.log(res)
+          console.log(result)
         }
       })
     }
   })
+})
+
+router.post('/token',(req,res)=>{
+
 })
 
 module.exports = router

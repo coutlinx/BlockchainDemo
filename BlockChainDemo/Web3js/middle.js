@@ -6,7 +6,7 @@ var Web3 = require('web3')
 var fs = require('fs')
 var authionData = fs.readFileSync('C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\authion.json', 'utf-8')
 var tokenDate = fs.readFileSync('C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\Token.json', 'utf-8')
-//连接到Ganache
+//连接到Ganachea
 var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'))
 var authionContract = new web3.eth.Contract(JSON.parse(authionData), authion)
 var tokenContract = new web3.eth.Contract(JSON.parse(tokenDate), token)

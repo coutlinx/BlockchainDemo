@@ -1,14 +1,14 @@
 var express = require('express');
 var pool = require('../config/dbConfig');
 var router = express.Router();
-var identity = "admin"
+var identity = "1"
 var method = require("../config/methodConfig")
 
 router.get('/', function(req, res, next) {
   res.render('more',{identity:identity})
     console.log(req.body)
   });
-  router.post('/',async (req,res)=>{
+  router.post('/getIdentity',async (req,res)=>{
     console.log(req.body)
     insert = await method.Readconfig()
     pool.Query(insert.DBCONFIG[0].IDENTITY,[req.body.acc],(err,reas)=>{
