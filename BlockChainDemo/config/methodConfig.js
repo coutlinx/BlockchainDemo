@@ -1,6 +1,7 @@
 var crypto = require("crypto");
 var fs = require("fs");
 var mid = require("../Web3js/middle")
+var sha256 = require('sha256')
 //加密用的key和向量
 const password = "FnJL7EDzjqWjcaY9";
 const iv = "FnJL7EDzjqWjcaY9";
@@ -30,8 +31,8 @@ function Decode(_passwd) {
   return decipher.final().toString()
 }
 
-function TurnintoHash(){
-  
+function TurnintoHash(Hash){
+  return "0x"+sha256(Hash)
 }
 
 async function Readconfig() {

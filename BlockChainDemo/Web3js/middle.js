@@ -90,17 +90,20 @@ async function SetExpre(callAdd, Expert_addr, Expert_name) {
 async function SetOwner(callAdd, OwnerName, Owner_addr) {
   const promise = authionContract.methods.SetOwner(OwnerName, Owner_addr).send({
     from: callAdd,
+    gas:"300000000"
   })
   return promise
 }
 
 async function SetAution(callAdd, Hash, value) {
+  console.log(callAdd, Hash, value)
   const promise = authionContract.methods.SetAution(Hash, value).send({
     from: callAdd,
+    gas:"3000000",
   })
   return promise
 }
-
+SetAution("0x126E173fFBe22610c5B189B43c24AB60d3b88156","0xd9e8796abfde3336e62fc24e0b4d850e3fb59e7600336453a31fdb1e9fc84164",200000).then(console.log)
 async function Get_Contract_Balance() {
   const account = await Getaccout()
   const promise = authionContract.methods.Get_Contract_Balance().call({

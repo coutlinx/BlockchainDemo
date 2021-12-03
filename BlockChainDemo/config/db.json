@@ -1,10 +1,10 @@
 {
-    "DBCONFIG": [
-        {
-            "REGISTER": "INSERT INTO user (address) VALUES (?)",
-            "QueryRep": "SELECT * FROM user WHERE address = ? and role = 'user' ",
-            "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?",
-            "IDENTITY":"Select role from user where address= ?"
-        }
-    ]
+    "DBCONFIG": {
+        "REGISTER": "INSERT INTO user (address) VALUES (?)",
+        "QueryRep": "SELECT * FROM user WHERE address = ? and role = 'user' ",
+        "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?",
+        "IDENTITY": "Select role from user where address= ?",
+        "SetAuthion": "INSERT INTO authion (name,about,Hash,authion_user) VALUES (?,?,?,?)",
+        "Getid":"select ID from user where address = ?"
+    }
 }

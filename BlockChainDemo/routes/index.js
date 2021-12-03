@@ -12,14 +12,14 @@ router.post('/', async (req, res) => {
   console.log(req.body)
   insert = await method.Readconfig();
   token = await middle.GetTokenBalance(acc);
-  pool.Query(insert.DBCONFIG[0].QueryRep, [acc], (err, result) => {
+  pool.Query(insert.DBCONFIG.QueryRep, [acc], (err, result) => {
     if (err) {
       console.log(err)
     } else if (result.length > 0) {
       console.log('sucess!')
       res.json({token:token})
     } else {
-      pool.Query(insert.DBCONFIG[0].REGISTER, [acc], (err, result) => {
+      pool.Query(insert.DBCONFIG.REGISTER, [acc], (err, result) => {
         if (err) {
           console.log(err)
         } else {
