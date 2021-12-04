@@ -1,17 +1,23 @@
 var token = '0x345547c5707378d4B5d922015c469f85562D8f80'
 var safeMath = '0x92d08272B26B2a93fD7d9037FC6a8d651dE974de'
-var authion = '0x8FF0f5614e3067a09F58310f01EcafA08468E4a7'
+var authion = '0xdCB0dD0462EE5685175f42Fb010bcE7A056A5da0'
 
 var Web3 = require('web3')
 var fs = require('fs')
-var authionData = fs.readFileSync('C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\authion.json', 'utf-8')
-var tokenDate = fs.readFileSync('C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\Token.json', 'utf-8')
+var authionData = fs.readFileSync(
+  'C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\authion.json',
+  'utf-8',
+)
+var tokenDate = fs.readFileSync(
+  'C:\\Users\\LINX\\Desktop\\Dapp\\BlockchainDemo\\BlockChainDemo\\Web3js\\ABI\\Token.json',
+  'utf-8',
+)
 //连接到Ganachea
 var web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'))
 var authionContract = new web3.eth.Contract(JSON.parse(authionData), authion)
 var tokenContract = new web3.eth.Contract(JSON.parse(tokenDate), token)
 async function Getaccout() {
-  return (web3.eth.getAccounts())
+  return web3.eth.getAccounts()
 }
 async function call() {
   console.log(await Getaccout())
@@ -74,6 +80,7 @@ async function SetAdmin(callAdd, Admin_addr, Admin_name) {
     .SetAdmin(Admin_addr, Admin_name)
     .send({
       from: callAdd,
+      gas: '300000000',
     })
   return promise
 }
@@ -87,10 +94,11 @@ async function SetExpre(callAdd, Expert_addr, Expert_name) {
   return promise
 }
 
-async function SetOwner(callAdd, OwnerName, Owner_addr) {
+async function SetOwner(OwnerName, Owner_addr) {
+  const callAdd = await Getaccout()
   const promise = authionContract.methods.SetOwner(OwnerName, Owner_addr).send({
-    from: callAdd,
-    gas:"300000000"
+    from: callAdd[0],
+    gas: '3000000',
   })
   return promise
 }
@@ -99,11 +107,11 @@ async function SetAution(callAdd, Hash, value) {
   console.log(callAdd, Hash, value)
   const promise = authionContract.methods.SetAution(Hash, value).send({
     from: callAdd,
-    gas:"3000000",
+    gas: '3000000',
   })
   return promise
 }
-SetAution("0x126E173fFBe22610c5B189B43c24AB60d3b88156","0xd9e8796abfde3336e62fc24e0b4d850e3fb59e7600336453a31fdb1e9fc84164",200000).then(console.log)
+// SetAution("0x126E173fFBe22610c5B189B43c24AB60d3b88156","0xd9e8796abfde3336e62fc24e0b4d850e3fb59e7600336453a31fdb1e9fc84164",200000).then(console.log)
 async function Get_Contract_Balance() {
   const account = await Getaccout()
   const promise = authionContract.methods.Get_Contract_Balance().call({
@@ -125,18 +133,44 @@ async function withdraw(callAdd, Hash) {
   return promise
 }
 
-async function GetTokenBalance(callAdd){
+async function GetTokenBalance(callAdd) {
   const promise = tokenContract.methods.balanceOf(callAdd).call({
-    from:callAdd
+    from: callAdd,
   })
   return promise
 }
 
-async function RechargeToken(callAdd,value){
-  const account = await web3.eth.getAccounts()
-  const promise = tokenContract.methods.transfer(callAdd,BigInt(value*(10**18))).send({
-    from:account[0]
+async function GetOwner(callAdd) {
+  const acc = Getaccout()
+  const promise = authionContract.methods.GetOwner(callAdd).call({
+    from: acc[0],
   })
+  return promise
+}
+
+async function GetAdmin(callAdd) {
+  const acc = Getaccout()
+  const promise = authionContract.methods.GetAdmin(callAdd).call({
+    from: acc[0],
+  })
+  return promise
+}
+
+async function GetExpert(callAdd) {
+  const acc = Getaccout()
+  const promise = authionContract.methods.GetExpert(callAdd).call({
+    from: acc[0],
+  })
+  return promise
+}
+
+async function RechargeToken(callAdd, value) {
+  const account = await web3.eth.getAccounts()
+  const promise = tokenContract.methods
+    .transfer(callAdd, BigInt(value * 10 ** 18))
+    .send({
+      from: account[0],
+    })
   return promise
 }
 
@@ -176,5 +210,8 @@ module.exports = {
   Pay_value,
   withdraw,
   GetTokenBalance,
-  RechargeToken
+  RechargeToken,
+  GetOwner,
+  GetAdmin,
+  GetExpert,
 }

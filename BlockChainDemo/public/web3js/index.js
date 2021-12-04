@@ -16,7 +16,12 @@ if (typeof window.ethereum !== 'undefined') {
         data: { acc: Account},
         dataType: 'json',
         success: function (data) {
+          if(data.alert == "name"){
+            console.log(1)
+            $('#exampleModal').modal('show')
+          }
           $('#accountBalance').html(parseInt(data.token / Math.pow(10, 18)) + 'LINX')
+          
         },
         error: function (data) {
           console.log(data)
