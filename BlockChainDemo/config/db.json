@@ -5,6 +5,8 @@
         "LOGIN": "SELECT phone,passwd FROM user WHERE phone = ?",
         "IDENTITY": "Select role from user where address= ?",
         "SetAuthion": "INSERT INTO authion (name,about,Hash,authion_user) VALUES (?,?,?,?)",
-        "Getid":"select ID from user where address = ?"
+        "Getid":"select ID from user where address = ?",
+        "GetAllhash":"select Hash from authion",
+        "GetAuthion":"select * from authion where Hash = ?"
     }
 }

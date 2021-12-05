@@ -233,6 +233,25 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "Hash",
+				"type": "string"
+			}
+		],
+		"name": "GetHighestAuthion",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "Addr",
 				"type": "address"
@@ -245,6 +264,25 @@
 				"name": "",
 				"type": "uint256"
 			},
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "Hash",
+				"type": "string"
+			}
+		],
+		"name": "GetStartAuthion",
+		"outputs": [
 			{
 				"internalType": "bool",
 				"name": "",
@@ -510,25 +548,6 @@
 		"name": "changeValue",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "",
-				"type": "string"
-			}
-		],
-		"name": "endTime_linhao",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{

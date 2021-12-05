@@ -9,7 +9,6 @@ if (typeof window.ethereum !== 'undefined') {
       $('#accountAddress').html(Account)
       $option = `<option>${Account}</option>`
       $('#bidAccount').append($option)
-      
       $.ajax({  
         type: 'POST',
         url: 'http://localhost:3000/',

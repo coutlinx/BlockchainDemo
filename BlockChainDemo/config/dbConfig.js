@@ -9,7 +9,7 @@ var pool = mysql.createPool({
     queueLimit:8
 });
 
-let Query = (query,arry,callback)=>{
+let Query = async (query,arry,callback)=>{
     pool.getConnection((err,connect)=>{
         if (err){
             console.log(err);
@@ -25,7 +25,7 @@ let Query = (query,arry,callback)=>{
         connect.release();
     })
 }
-let Select = (query,callback)=>{
+let Select = async (query,callback)=>{
     pool.getConnection((err,connect)=>{
         if(err){
             console.log(err);

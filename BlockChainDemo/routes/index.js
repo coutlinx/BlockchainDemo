@@ -3,14 +3,13 @@ var pool = require('../config/dbConfig')
 var middle = require('../Web3js/middle')
 var router = express.Router()
 var method = require('../config/methodConfig')
-var acc
+var acc,token
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' })
 })
 router.post('/', async (req, res) => {
-  acc = req.body.acc
-
+  acc = req.body.acc 
   try {
     True = await middle.GetOwner(acc)
   } catch (e) {
@@ -25,6 +24,8 @@ router.post('/', async (req, res) => {
       console.log('sucess!')
       if(!True){
         res.json({ token: token, alert: 'name' })
+      }else{
+        res.json({ token: token})
       }
     } else {
       pool.Query(insert.DBCONFIG.REGISTER, [acc], (err, result) => {
@@ -39,9 +40,10 @@ router.post('/', async (req, res) => {
   })
 })
 
-router.post('/setOwner?', (req, res) => {
+router.post('/setOwner', (req, res) => {
   console.log(req.body)
   middle.SetOwner(req.body.name,acc).then(console.log)
+  res.redirect('/')
 })
 
 module.exports = router

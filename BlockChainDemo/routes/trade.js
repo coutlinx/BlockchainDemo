@@ -4,8 +4,19 @@ var mid = require('../Web3js/middle')
 var method = require('../config/methodConfig')
 var pool = require('../config/dbConfig')
 var Account
-router.get('/', function (req, res, next) {
-  res.render('trade')
+router.get('/', async function (req, res, next) {
+  var Hash =[]
+  query = await method.Readconfig()
+  await pool.Select(query.DBCONFIG.GetAllhash,(err,result)=>{
+    if (err){
+      console.error(err)
+    }else{
+      for(let i =0;i<result.length;i++){
+        Hash.push(result[i].Hash)
+      }
+      res.render('trade',{Hash:Hash})
+    }
+  })
 })
 router.post('/', async (req, res) => {
   TradeJson = {
@@ -31,7 +42,8 @@ router.post('/', async (req, res) => {
           } else {
             console.log(result)
             mid.SetAution(Account,Hash,req.body.value).then(console.log)
-            res.redirect("./")
+            mid.AuctionStartEvt_linhao()
+            res.redirect("http://localhost:3000/obj")
           }
         },
       )
