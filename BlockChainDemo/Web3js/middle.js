@@ -76,23 +76,24 @@ async function OwenrChange(callAdd, Hash) {
   })
   return promise
 }
-async function SetAdmin(Admin_addr, Admin_name) {
-  const callAdd = await Getaccout()
+async function SetAdmin(callAdd,Admin_addr, Admin_name) {
+ 
   const promise = await authionContract.methods
     .SetAdmin(Admin_addr, Admin_name)
     .send({
-      from: callAdd[4],
+      from: callAdd,
       gas: '300000000',
     })
   return promise
 }
 
-async function SetExpre(Expert_addr, Expert_name) {
-  const callAdd = await Getaccout()
+async function SetExpre(callAdd,Expert_addr, Expert_name) {
+  console.log(callAdd)
   const promise = await authionContract.methods
     .SetExpre(Expert_addr, Expert_name)
     .send({
-      from: callAdd[4],
+      from: callAdd,
+      gas: '3000000',
     })
   return promise
 }

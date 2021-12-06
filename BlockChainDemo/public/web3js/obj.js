@@ -18,7 +18,6 @@ if (typeof window.ethereum !== 'undefined') {
   })
   Hash = $.parseJSON('[' + $('#Hash').val() + ']')
   console.log(Hash)
-
   var authion = ""
   for (let i = 0; i < Hash.length; i++) {
     authion += `<div class="mainOBJ">

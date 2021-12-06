@@ -1,27 +1,87 @@
-var express = require('express');
-var pool = require('../config/dbConfig');
-var router = express.Router();
-var identity = "1"
-var method = require("../config/methodConfig")
-
-router.get('/', function(req, res, next) {
-  res.render('more',{identity:identity})
-    console.log(req.body)
-  });
-  router.post('/getIdentity',async (req,res)=>{
-    console.log(req.body)
-    insert = await method.Readconfig()
-    pool.Query(insert.DBCONFIG[0].IDENTITY,[req.body.acc],(err,reas)=>{
-      if(err){
+var express = require('express')
+var pool = require('../config/dbConfig')
+var router = express.Router()
+var mid = require('../Web3js/middle')
+var identity = 'admin'
+var method = require('../config/methodConfig')
+var acc
+router.get('/', async function (req, res, next) {
+  insert = await method.Readconfig()
+  if (acc != undefined) {
+    pool.Query(insert.DBCONFIG.IDENTITY, [acc], (err, result) => {
+      if (err) {
         console.log(err)
-      }else{
-        identity= reas[0].role
+      } else {
+        console.log(result)
+        identity = result[0].role
         console.log(identity)
+        res.render('more', { identity: identity })
       }
     })
-    res.redirect("/")
+  } else {
+    res.render('more', { identity: identity })
+  }
+})
+router.post('/setacc', (req, res) => {
+  acc = req.body.acc
+})
+router.post('/setidentity', (req, res) => {
+  console.log(req.body)
+  if (req.body.identity == 'admin') {
+    mid
+      .SetAdmin(req.body.YourAddress, req.body.Address, req.body.Name)
+      .then(async (ress) => {
+        let query = await method.Readconfig()
+        pool.Query(query, [req.body.identity, req.body.Address])
+        res.render('more', { identity: identity })
+      })
+  } else if (req.body.identity == 'expert') {
+    mid
+      .SetExpre(req.body.YourAddress, req.body.Address, req.body.Name)
+      .then(async (ress) => {
+        let query = await method.Readconfig()
+        pool.Query(query, [req.body.identity, req.body.Address])
+        res.render('more', { identity: identity })
+      })
+  } else {
+    mid.SetOwner(req.body.Name, req.body.Address).then(async (ress) => {
+      let query = await method.Readconfig()
+      pool.Query(query, [req.body.identity, req.body.Address])
+      res.render('more', { identity: identity })
+    })
+  }
+})
+router.post('/getauthion', async(req, res) => {
+    query = await method.Readconfig()
+  pool.Select(query.DBCONFIG.GetUnstartauthion,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(JSON.stringify(result))
+      res.json({"Authion":JSON.stringify(result)})
+    }
   })
-  router.post("/setIdentity",(req,res)=>{
-    console.log(req.body);
+})
+router.post('/getendAuthion',async (req,res)=>{
+  query = await method.Readconfig()
+  pool.Select(query.DBCONFIG.GetStartauthion,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(JSON.stringify(result))
+      res.json({"Authion":JSON.stringify(result)})
+    }
   })
-  module.exports = router;
+})
+router.post('/valuation',async (req,res)=>{
+  query = await method.Readconfig()
+  pool.Select(query.DBCONFIG.GetValuation,(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      console.log(JSON.stringify(result))
+      res.json({"Authion":JSON.stringify(result)})
+    }
+  })
+})
+module.exports = router
