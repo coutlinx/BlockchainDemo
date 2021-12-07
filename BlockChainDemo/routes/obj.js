@@ -43,4 +43,10 @@ router.post('/setacc', (req, res) => {
   acc = req.body.acc
   console.log(acc)
 })
+
+router.post('/more',async (req,res)=>{
+  console.log(req.body)
+  value = await mid.lookValue(req.body.ACC,req.body.HASH);
+  
+})
 module.exports = router

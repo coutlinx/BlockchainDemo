@@ -2,61 +2,45 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="javascripts/styles.css">
-    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <script src="javascripts/jquery-1.12.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="javascripts/styles.css">
+  <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+  <script src="javascripts/jquery-1.12.4/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+  <title>Document</title>
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="sidebar">
-            <h2>LINX</h2>
-            <ul>
-                <li><a href="/"><i class="fas fa-home"></i>主页</a></li>
-                <li><a href="./self"><i class="fas fa-user"></i>个人</a></li>
-                <li><a href="./obj"><i class="fas fa-address-card"></i>我的物品</a></li>
-                <li><a href="./trade"><i class="fas fa-project-diagram"></i>创建/加入交易</a></li>
-                <li><a href="./withdraw"><i class="fas fa-blog"></i>提现</a></li>
-                <li><a href="./recharge"><i class="fas fa-address-book"></i>充值</a></li>
-                <li><a href="./more"><i class="fas fa-map-pin"></i>更多</a></li>
-            </ul>
-        </div>
-        <input value="<%=identity%>" style="display:none;" id="value">
-        <div class="main_content">
-              <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                    
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div>
+  <div class="wrapper">
+    <div class="sidebar">
+      <h2>LINX</h2>
+      <ul>
+        <li><a href="/"><i class="fas fa-home"></i>主页</a></li>
+        <li><a href="./self"><i class="fas fa-user"></i>个人</a></li>
+        <li><a href="./obj"><i class="fas fa-address-card"></i>我的物品</a></li>
+        <li><a href="./trade"><i class="fas fa-project-diagram"></i>创建/加入交易</a></li>
+        <li><a href="./withdraw"><i class="fas fa-blog"></i>提现</a></li>
+        <li><a href="./recharge"><i class="fas fa-address-book"></i>充值</a></li>
+        <li><a href="./more"><i class="fas fa-map-pin"></i>更多</a></li>
+      </ul>
     </div>
+    <input value="<%=identity%>" style="display:none;" id="value">
+    <div class="main_content">
+      <div id="alter">
+        
+      </div>
     </div>
-    <!-- Button trigger modal -->
+  </div>
+  </div>
+  <!-- Button trigger modal -->
 
 
 </body>
@@ -64,7 +48,7 @@
 <script src="web3js/web3.min.js"></script>
 <script src="web3js/more.js"></script>
 <script>
-    
+
 </script>
 
 </html>

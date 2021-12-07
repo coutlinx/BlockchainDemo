@@ -61,7 +61,7 @@ if (typeof window.ethereum !== 'undefined') {
                 src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
             <span style=" overflow: hidden;
             text-overflow: ellipsis;">HASH:${authion[i].Hash}</span>
-            <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">估值</button>
+            <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;" onclick ="valuation(this)">估值</button>
         </div>`
         }
         $('.main_content').append(main)
@@ -74,7 +74,7 @@ if (typeof window.ethereum !== 'undefined') {
   function startAuthion(e) {
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:3000/more/getauthion',
+      url: 'http://localhost:3000/more/GetUnstartauthion',
       dataType: 'json',
       success: function (data) {
         var main = ''
@@ -176,4 +176,96 @@ if (typeof window.ethereum !== 'undefined') {
 
 function getAccount() {
   return ethereum.request({ method: 'eth_requestAccounts' })
+}
+
+function valuation(e) {
+  console.log(e.parentNode.children[1].innerHTML)
+  Hash = e.parentNode.children[1].innerHTML.split('HASH:')
+  Hash = Hash[1]
+  console.log(Hash)
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost:3000/more/getAuthion',
+    dataType: 'json',
+    data: { HASH: Hash },
+    success: function (data) {
+      authion = $.parseJSON(data.Authion)
+      console.log(authion)
+      table = `
+        <div id="addcase" class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <h4 class="modal-title">简介</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                          <div class="col-4">
+                            <div class="list-group" id="list-tab" role="tablist">
+                              <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list"
+                                href="#list-home" role="tab" aria-controls="home">Hash</a>
+                              <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list"
+                                href="#list-profile" role="tab" aria-controls="profile">简介</a>
+                              <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list"
+                                href="#list-messages" role="tab" aria-controls="messages">价格</a>
+                              <a class="list-group-item list-group-item-action" id="list-nameing-list" data-toggle="list"
+                                href="#list-nameing" role="tab" aria-controls="nameing">名字</a>
+                              <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list"
+                                href="#list-settings" role="tab" aria-controls="settings">估值</a>
+                            </div>
+                          </div>
+                          <div class="col-8">
+                            <div class="tab-content" id="nav-tabContent">
+                              <div class="tab-pane fade show active" id="list-home" role="tabpanel"
+                                aria-labelledby="list-home-list" style=" overflow: hidden;
+                                text-overflow: ellipsis;">${authion[0].Hash}</div>
+                              <div class="tab-pane fade" id="list-profile" role="tabpanel"
+                                aria-labelledby="list-profile-list">${authion[0].about}</div>
+                              <div class="tab-pane fade" id="list-messages" role="tabpanel"
+                                aria-labelledby="list-messages-list">2000</div>
+                              <div class="tab-pane fade" id="list-nameing" role="tabpanel"
+                                aria-labelledby="list-nameing-list">${authion[0].name}</div>
+                                <div class="tab-pane fade" id="list-settings" role="tabpanel"
+                                aria-labelledby="list-settings-list"><input id="val"class="form-control" type="text" placeholder="请输入您的估值"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="form-group">
+                          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">关闭</button>
+                          <button type="submit" class="btn btn-primary" onclick = "submit()">确认</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>`
+      $('#alter').html(table)
+      $('#addcase').modal('show')
+    },
+    error: function (data) {
+      console.log(data)
+    },
+  })
+}
+
+async function submit() {
+  Hash = $('#list-home').html()
+  acc = await getAccount()
+  acc = acc[0]
+  value = $("#val").val()
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost:3000/more/val',
+    dataType: 'json',
+    data: { HASH: Hash,acc:acc,value:value},
+    success: function(data){
+      console.log(data)
+      location.reload()
+    },
+    error:function(data){
+      console.log(data)
+    }
+  })
 }

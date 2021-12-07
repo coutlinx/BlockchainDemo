@@ -2,7 +2,7 @@ var express = require('express')
 var pool = require('../config/dbConfig')
 var router = express.Router()
 var mid = require('../Web3js/middle')
-var identity = 'admin'
+var identity = 'user'
 var method = require('../config/methodConfig')
 var acc
 router.get('/', async function (req, res, next) {
@@ -51,7 +51,7 @@ router.post('/setidentity', (req, res) => {
     })
   }
 })
-router.post('/getauthion', async(req, res) => {
+router.post('/GetUnstartauthion', async(req, res) => {
     query = await method.Readconfig()
   pool.Select(query.DBCONFIG.GetUnstartauthion,(err,result)=>{
     if(err){
@@ -81,6 +81,32 @@ router.post('/valuation',async (req,res)=>{
     }else{
       console.log(JSON.stringify(result))
       res.json({"Authion":JSON.stringify(result)})
+    }
+  })
+})
+router.post("/getAuthion",async(req,res)=>{
+  console.log(req.body)
+  query = await method.Readconfig()
+  
+  pool.Query(query.DBCONFIG.GetAuthion,[req.body.HASH],(err,result)=>{
+    if (err){
+      console.log(err)
+    }else{
+      res.json({"Authion":JSON.stringify(result)})
+    }
+  })
+})
+
+router.post('/val',async(req,res)=>{
+  console.log(req.body)
+  query = await method.Readconfig()
+  pool.Query(query.DBCONFIG.SetValue,[req.body.HASH],(err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      valuation =mid.valuation(req.body.acc,req.body.HASH,req.body.value);
+      valuation.then(console.log)
+      res.json(true)
     }
   })
 })
