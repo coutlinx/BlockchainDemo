@@ -47,9 +47,44 @@ async function more(e) {
     dataType: 'json',
     success:function(data){
       console.log(data)
+      $(".modal-body").html(`<ul class="list-group">
+      <li class="list-group-item">预估价格:${data.Value}</li>
+      <li class="list-group-item list-group-item-primary" id="HASH">物品Hash:${data.Hash} </li>
+      <input class="form-control" type="text" id="val" placeholder="请输入您的价格">
+    </ul>`)
+      $("#addcase").modal("show")
     },
     error:function(data){
       console.log(data)
+    }
+  })
+}
+
+async function confirm(){
+  value = $("#val").val()
+  acc = await getAccount()
+  hash = $("#HASH").html().split("物品Hash:")[1]
+  console.log(hash)
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost:3000/obj/confirm',
+    data: { VALUE: value,ACC:acc[0],HASH:hash},
+    dataType: 'json',
+    success:function(data){
+      $(".modal-body").html(`<ul class="list-group">
+      <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden;">blockHash:${data.statu.blockHash}</li>
+      <li class="list-group-item list-group-item-primary" style="text-overflow:ellipsis;overflow: hidden;">blockNumber:${data.statu.blockNumber}</li>
+      <li class="list-group-item list-group-item-secondary" style="text-overflow:ellipsis;overflow: hidden;">contractAddress:${data.statu.contractAddress}</li>
+      <li class="list-group-item list-group-item-success" style="text-overflow:ellipsis;overflow: hidden;">cumulativeGasUsed:${data.statu.cumulativeGasUsed}</li>
+      <li class="list-group-item list-group-item-danger" style="text-overflow:ellipsis;overflow: hidden;">from:${data.statu.from}</li>
+      <li class="list-group-item list-group-item-warning" style="text-overflow:ellipsis;overflow: hidden;">gasUsed:${data.statu.gasUsed}</li>
+      <li class="list-group-item list-group-item-info" style="text-overflow:ellipsis;overflow: hidden;">to:${data.statu.to}</li>
+      <li class="list-group-item list-group-item-light" style="text-overflow:ellipsis;overflow: hidden;">transactionHash:${data.statu.transactionHash}</li>
+      <li class="list-group-item list-group-item-dark" style="text-overflow:ellipsis;overflow: hidden;">logsBloom:${data.statu.logsBloom}</li>
+    </ul>`)
+    },
+    error:function(data){
+
     }
   })
 }

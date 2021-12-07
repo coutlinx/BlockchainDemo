@@ -47,6 +47,14 @@ router.post('/setacc', (req, res) => {
 router.post('/more',async (req,res)=>{
   console.log(req.body)
   value = await mid.lookValue(req.body.ACC,req.body.HASH);
-  
+  console.log(value)
+  res.json({Value:value,Hash:req.body.HASH})
+})
+
+router.post('/confirm',async(req,res)=>{
+  console.log(req.body)
+  confirm = await mid.ChangeValue(req.body.ACC,req.body.HASH,req.body.VALUE)
+  console.log(confirm)
+  res.json({statu:confirm})
 })
 module.exports = router
