@@ -40,6 +40,13 @@ router.post('/', async (req, res) => {
   })
 })
 
+router.get('/authion/:hash',async(req,res)=>{
+  console.log(req.params)
+  data = await middle.GetAuthion(req.params.hash)
+  HighestBider = await middle.GetHibestBider(req.params.hash)
+  console.log(data,HighestBider)
+  res.render('index',{HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:data.value_linhao,HighestBider:HighestBider})
+})
 router.post('/setOwner', (req, res) => {
   console.log(req.body)
   middle.SetOwner(req.body.name,acc).then(console.log)

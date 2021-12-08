@@ -9,9 +9,10 @@
         "GetAllhash":"select Hash from authion",
         "GetAuthion":"select * from authion where Hash = ?",
         "setIdentity":"update user set role = ? where address = ?",
-        "GetUnstartauthion":"select * from authion where status = 0",
+        "GetUnstartauthion":"select * from authion where status = 0 and valuation = 1",
         "GetStartauthion":"select * from authion where status = 1",
         "GetValuation":"select * from authion where valuation = 0",
-        "SetValue":"update authion set valuation = 1 where Hash = ?"
+        "SetValue":"update authion set valuation = 1 where Hash = ?",
+        "StartAuthion":"update authion set status = 1 where Hash = ?"
     }
 }

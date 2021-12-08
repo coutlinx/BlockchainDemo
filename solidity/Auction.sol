@@ -6,32 +6,32 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 
 contract Auction {
     using SafeMath for uint256;
-    struct Admin {
+    struct Admin_linhao {
         string name_linhao;
         address Admin_add_linhao;
         uint256 ID;
     }
-    struct Expert {
+    struct Expert_linhao {
         string name_linhao;
         address Expert_add_linhao;
         uint256 ID;
     }
-    struct Owner {
+    struct Owner_linhao {
         string name_linhao;
         address Owner_add_linhao;
         uint256 ID;
     }
-    struct auction {
+    struct auction_linhao {
         address owner_linhao;
         string objhash_linhao;
         uint256 value_linhao;
     }
     address ERC20_address_linhao;
 
-    Admin[] Admins_linhao;
-    Expert[] Experts_linhao;
-    Owner[] Owners_linhao;
-    auction[] auctions_linhao; //结构体数组
+    Admin_linhao[] Admins_linhao;
+    Expert_linhao[] Experts_linhao;
+    Owner_linhao[] Owners_linhao;
+    auction_linhao[] auctions_linhao; //结构体数组
 
     mapping(string => uint256) public OBJ_linhao; //物品hash与结构体id绑定
     mapping(address => string[]) public ObjMap_linhao;
@@ -47,7 +47,7 @@ contract Auction {
 
     constructor(address ERC20_address) {
         ERC20_address_linhao = ERC20_address;
-        Admin memory ROOT = Admin({
+        Admin_linhao memory ROOT = Admin_linhao({
             name_linhao: "ROOT",
             Admin_add_linhao: msg.sender,
             ID: 0
@@ -71,6 +71,7 @@ contract Auction {
         starTime_linhao[Hash] = block.timestamp;
         startFlg_linhao[Hash] = true;
         hibest_bid_linhao[Hash] = Aution_value_linhao[Hash];
+        
         emit AuctionStartEvt_linhao(Hash);
     }
 
@@ -81,6 +82,7 @@ contract Auction {
         );
         startFlg_linhao[Hash] = false;
         starTime_linhao[Hash] = 0;
+        auctions_linhao[OBJ_linhao[Hash]].value_linhao = hibest_bid_linhao[Hash];
     }
 
     function valuation(string memory Hash, uint256 value) public OnlyExpert {
@@ -99,6 +101,7 @@ contract Auction {
         auctions_linhao[OBJ_linhao[Hash]].value_linhao = value;
         Aution_value_linhao[Hash] = value;
         values_linhao[Hash] = value;
+        auctions_linhao[OBJ_linhao[Hash]].value_linhao = Aution_value_linhao[Hash];
         emit Owner_SetValue(Hash);
     }
 
@@ -132,7 +135,7 @@ contract Auction {
         OnlyAdmin
         returns (uint256)
     {
-        Admin memory setAdmin = Admin({
+        Admin_linhao memory setAdmin = Admin_linhao({
             name_linhao: Admin_name,
             Admin_add_linhao: Admin_addr,
             ID: 0
@@ -149,7 +152,7 @@ contract Auction {
         OnlyAdmin
         returns (uint256)
     {
-        Expert memory expert = Expert({
+        Expert_linhao memory expert = Expert_linhao({
             name_linhao: Expert_name,
             Expert_add_linhao: Expert_addr,
             ID: 0
@@ -166,7 +169,7 @@ contract Auction {
         OnlyAdmin
         returns (uint256)
     {
-        Owner memory owner = Owner({
+        Owner_linhao memory owner = Owner_linhao({
             name_linhao: OwnerName,
             Owner_add_linhao: Owner_addr,
             ID: 0
@@ -179,7 +182,7 @@ contract Auction {
     }
 
     function SetAution(string memory Hash, uint256 money) public {
-        auction memory auc = auction({
+        auction_linhao memory auc = auction_linhao({
             owner_linhao: msg.sender,
             objhash_linhao: Hash,
             value_linhao: money
@@ -238,6 +241,9 @@ contract Auction {
         return startFlg_linhao[Hash];
     }
 
+    function GetAuthion(string memory Hash)public view returns(auction_linhao memory){
+        return auctions_linhao[OBJ_linhao[Hash]];
+    }
     modifier LowerPrice(string memory Hash, uint256 money) {
         require(
             hibest_bid_linhao[Hash] < money,

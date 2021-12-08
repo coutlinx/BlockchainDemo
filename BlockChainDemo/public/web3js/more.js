@@ -86,7 +86,7 @@ if (typeof window.ethereum !== 'undefined') {
                 src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
             <span style=" overflow: hidden;
             text-overflow: ellipsis;">HASH:${authion[i].Hash}</span>
-            <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;">开始</button>
+            <button type="button" class="btn btn-default" style="margin-left: 40%;background-color: black; color: aliceblue;" onclick="start(this)">开始</button>
         </div>`
         }
         $('.active').removeClass('active')
@@ -263,6 +263,57 @@ async function submit() {
     success: function(data){
       console.log(data)
       location.reload()
+    },
+    error:function(data){
+      console.log(data)
+    }
+  })
+}
+
+async function start(e){
+  Hash = e.parentNode.children[1].innerHTML.split('HASH:')[1]
+  acc = await getAccount()
+  acc = acc[0]
+  $.ajax({
+    type: 'POST',
+    url: 'http://localhost:3000/more/start',
+    dataType: 'json',
+    data: { HASH: Hash,ACC:acc},
+    success:function(data){
+      console.log(data)
+      returns = `<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">充值完成</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul class="list-group">
+                        <li class="list-group-item" style="text-overflow:ellipsis;overflow: hidden;">blockHash:${data.information.blockHash}</li>
+                        <li class="list-group-item list-group-item-primary" style="text-overflow:ellipsis;overflow: hidden;">blockNumber:${data.information.blockNumber}</li>
+                        <li class="list-group-item list-group-item-secondary" style="text-overflow:ellipsis;overflow: hidden;">contractAddress:${data.information.contractAddress}</li>
+                        <li class="list-group-item list-group-item-success" style="text-overflow:ellipsis;overflow: hidden;">cumulativeGasUsed:${data.information.cumulativeGasUsed}</li>
+                        <li class="list-group-item list-group-item-danger" style="text-overflow:ellipsis;overflow: hidden;">from:${data.information.from}</li>
+                        <li class="list-group-item list-group-item-warning" style="text-overflow:ellipsis;overflow: hidden;">gasUsed:${data.information.gasUsed}</li>
+                        <li class="list-group-item list-group-item-info" style="text-overflow:ellipsis;overflow: hidden;">to:${data.information.to}</li>
+                        <li class="list-group-item list-group-item-light" style="text-overflow:ellipsis;overflow: hidden;">transactionHash:${data.information.transactionHash}</li>
+                        <li class="list-group-item list-group-item-dark" style="text-overflow:ellipsis;overflow: hidden;">logsBloom:${data.information.logsBloom}</li>
+                      </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>`
+        $('#res').html(returns)
+        $(function () {
+          $('#exampleModalLong').modal('show')
+        })
     },
     error:function(data){
       console.log(data)

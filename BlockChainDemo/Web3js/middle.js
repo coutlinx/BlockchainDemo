@@ -1,6 +1,6 @@
 var token = '0x242BC188A9FD3fd19d255f52DcA91Be9989b7547'
 var safeMath = '0x88A469Adc8f7A6a9876413dE248D1D2700b0848F'
-var authion = '0xF1cD4633fFaa659F3f44080aB75608e1EA9F03d1'
+var authion = '0xe8b75688A739DD44540dA93da5d092cE34985452'
 
 var Web3 = require('web3')
 var fs = require('fs')
@@ -39,6 +39,7 @@ async function ObjBit(callAdd, Hash, value) {
 async function StartAution(callAdd, Hash) {
   const promise = await authionContract.methods.StartAution(Hash).send({
     from: callAdd,
+    gas:'3000000',
   })
   return promise
 }
@@ -82,7 +83,7 @@ async function SetAdmin(callAdd,Admin_addr, Admin_name) {
     .SetAdmin(Admin_addr, Admin_name)
     .send({
       from: callAdd,
-      gas: '300000000',
+      gas: '3000000',
     })
   return promise
 }
@@ -194,6 +195,22 @@ async function HighBidEvt_linhao() {
   const promise = authionContract.events.HighBidEvt_linhao()
   return promise
 }
+
+async function GetAuthion(Hash){
+  const callAdd = await web3.eth.getAccounts()
+  const promise = authionContract.methods.GetAuthion(Hash).call({
+    from:callAdd[4]
+  })
+  return promise
+}
+
+async function GetHibestBider(Hash){
+  const callAdd = await web3.eth.getAccounts();
+  const promise = authionContract.methods.hibest_bider_linhao(Hash).call({
+    from:callAdd[4]
+  })
+  return promise;
+}
 // var ObjBit = authionContract.methods.ObjBit().call();
 //     console.log(ObjBit)
 // var StartAution = authionContract.methods.StartAution();
@@ -237,4 +254,6 @@ module.exports = {
   GetHighestAuthion,
   AuctionStartEvt_linhao,
   HighBidEvt_linhao,
+  GetAuthion,
+  GetHibestBider
 }

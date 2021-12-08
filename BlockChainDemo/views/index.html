@@ -3,10 +3,10 @@
 <head>
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
-    <link rel="stylesheet" href="javascripts/styles.css">
+    <link rel="stylesheet" href="/javascripts/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="javascripts/jquery-1.12.4/jquery.min.js"></script>
+    <script src="/javascripts/jquery-1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
@@ -32,14 +32,14 @@
         <div class="main_content">
             <h2><a href="index.html">LINX</a></h2>
             <h4>最火热的拍卖</h4>
-            <h5>拍卖HASH:0x1224644865446</h5>
+            <h5>拍卖HASH:<%= HASH %></h5>
             <hr />
 
             <div class="row">
                 <div class="column">
                     <label>受益人</label>
                     <blockquote>
-                        <p><em id="beneficiary">0x123456789..</em><br /></p>
+                        <p><em id="beneficiary"><%=Beneficiary %></em><br /></p>
                     </blockquote>
                 </div>
                 <div class="column">
@@ -57,14 +57,14 @@
                 <div class="column">
                     <label>出价最高者</label>
                     <blockquote>
-                        <p><em><span id="highestBidder"></span>0x123456789...<br />
+                        <p><em><span id="highestBidder"></span><%=HighestBider%><br />
                                 <span id="highestBid"></span></em></p>
                     </blockquote>
                 </div>
                 <div class="column">
                     <label>我的账户<label>
                             <blockquote>
-                                <p><em id="accountAddress">0x123456789..</em><br /></p>
+                                <p><em id="accountAddress"></em><br /></p>
                             </blockquote>
                 </div>
                 <div class="column">
@@ -127,7 +127,7 @@
     </div>
     <div id="alter"></div>
 </body>
-<script src="web3js/index.js"></script>
-<script src="web3js/web3.min.js"></script>
+<script src="/web3js/index.js"></script>
+<script src="/web3js/web3.min.js"></script>
 
 </html>

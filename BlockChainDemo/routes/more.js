@@ -110,4 +110,18 @@ router.post('/val',async(req,res)=>{
     }
   })
 })
+
+router.post('/start',async(req,res)=>{
+  console.log(req.body)
+  Start = await mid.StartAution(req.body.ACC,req.body.HASH);
+  query = await method.Readconfig();
+  pool.Query(query.DBCONFIG.StartAuthion,[req.body.HASH],(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      res.json({information:Start})
+    }
+  })
+})
 module.exports = router

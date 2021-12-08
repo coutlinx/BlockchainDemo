@@ -209,6 +209,42 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "Hash",
+				"type": "string"
+			}
+		],
+		"name": "GetAuthion",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "address",
+						"name": "owner_linhao",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "objhash_linhao",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value_linhao",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Auction.auction",
+				"name": "",
+				"type": "tuple"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "address",
 				"name": "Addr",
 				"type": "address"

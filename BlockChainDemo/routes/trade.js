@@ -7,7 +7,7 @@ var Account
 router.get('/', async function (req, res, next) {
   var Hash =[]
   query = await method.Readconfig()
-  await pool.Select(query.DBCONFIG.GetAllhash,(err,result)=>{
+  await pool.Select(query.DBCONFIG.GetStartauthion,(err,result)=>{
     if (err){
       console.error(err)
     }else{
