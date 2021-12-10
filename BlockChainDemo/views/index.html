@@ -21,12 +21,12 @@
             <h2>LINX</h2>
             <ul>
                 <li><a href="/"><i class="fas fa-home"></i>主页</a></li>
-                <li><a href="./self"><i class="fas fa-user"></i>个人</a></li>
-                <li><a href="./obj"><i class="fas fa-address-card"></i>我的物品</a></li>
-                <li><a href="./trade"><i class="fas fa-project-diagram"></i>创建/加入交易</a></li>
-                <li><a href="./withdraw"><i class="fas fa-blog"></i>提现</a></li>
-                <li><a href="./recharge"><i class="fas fa-address-book"></i>充值</a></li>
-                <li><a href="./more"><i class="fas fa-map-pin"></i>更多</a></li>
+                <li><a href="http://localhost:3000/self"><i class="fas fa-user"></i>个人</a></li>
+                <li><a href="http://localhost:3000/obj"><i class="fas fa-address-card"></i>我的物品</a></li>
+                <li><a href="http://localhost:3000/trade"><i class="fas fa-project-diagram"></i>创建/加入交易</a></li>
+                <li><a href="http://localhost:3000/withdraw"><i class="fas fa-blog"></i>提现</a></li>
+                <li><a href="http://localhost:3000/recharge"><i class="fas fa-address-book"></i>充值</a></li>
+                <li><a href="http://localhost:3000/more"><i class="fas fa-map-pin"></i>更多</a></li>
             </ul>
         </div>
         <div class="main_content">
@@ -45,7 +45,7 @@
                 <div class="column">
                     <label>价格</label>
                     <blockquote>
-                        <p><em><span id="raised">15600ETH</span><br /></em></p>
+                        <p><em><span id="raised"><%=VALUE%>LINX</span><br /></em></p>
                     </blockquote>
                 </div>
                 <div class="column">
@@ -127,7 +127,7 @@
     </div>
     <div id="alter"></div>
 </body>
-<script src="/web3js/index.js"></script>
 <script src="/web3js/web3.min.js"></script>
+<script src="/web3js/index.js"></script>
 
 </html>

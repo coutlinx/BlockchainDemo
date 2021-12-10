@@ -64,6 +64,7 @@ contract Auction {
     {
         hibest_bid_linhao[Hash] = money;
         hibest_bider_linhao[Hash] = msg.sender;
+        Aution_value_linhao[Hash] = money;
         emit HighBidEvt_linhao(msg.sender, money);
     }
 
@@ -107,7 +108,7 @@ contract Auction {
 
     function OwenrChange(address NewOwner, string memory Hash)
         public
-        IsEnding(Hash)
+        OnlyAdmin
     {
         string[] memory OldOwner = ObjMap_linhao[
             auctions_linhao[OBJ_linhao[Hash]].owner_linhao

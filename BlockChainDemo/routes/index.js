@@ -6,7 +6,7 @@ var method = require('../config/methodConfig')
 var acc,token
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' })
+  res.render('index', {HASH:"",Beneficiary:"",VALUE:"",HighestBider:""})
 })
 router.post('/', async (req, res) => {
   acc = req.body.acc 
@@ -51,6 +51,13 @@ router.post('/setOwner', (req, res) => {
   console.log(req.body)
   middle.SetOwner(req.body.name,acc).then(console.log)
   res.redirect('/')
+})
+
+router.post('/bid',async(req,res)=>{
+  console.log(req.body)
+  bid = await middle.ObjBit(req.body.ADDDR,req.body.HASH,req.body.VALUE);
+  console.log(bid)
+  res.json({BID:bid})
 })
 
 module.exports = router
