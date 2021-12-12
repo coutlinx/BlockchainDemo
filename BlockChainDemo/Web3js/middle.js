@@ -124,14 +124,16 @@ async function Get_Contract_Balance() {
   return promise
 }
 
-async function Pay_value(callAdd, Hash) {
+async function Pay_value(callAdd,Hash) {
+  console.log(Hash)
   const promise = authionContract.methods.Pay_value(Hash).send({
     from: callAdd,
+    gas:'3000000'
   })
   return promise
 }
 
-async function withdraw(callAdd, Hash) {
+async function withdraw(callAdd,Hash) {
   const promise = authionContract.methods.withdraw(Hash).send({
     from: callAdd,
   })
@@ -179,10 +181,12 @@ async function RechargeToken(callAdd, value) {
   return promise
 }
 
-async function GetHighestAuthion(callAdd, Hash) {
+async function GetHighestAuthion(Hash) {
+  
+  const account = await web3.eth.getAccounts()
   const promise = authionContract.methods
     .GetHighestAuthion(Hash)
-    .call({ from: callAdd })
+    .call({ from: account[4] })
   return promise
 }
 //事件监听=======================================
@@ -207,6 +211,15 @@ async function GetAuthion(Hash){
 async function GetHibestBider(Hash){
   const callAdd = await web3.eth.getAccounts();
   const promise = authionContract.methods.hibest_bider_linhao(Hash).call({
+    from:callAdd[4]
+  })
+  console.log(Hash)
+  return promise;
+}
+
+async function GetHibest_bid_linhao(Hash){
+  const callAdd = await web3.eth.getAccounts();
+  const promise = authionContract.methods.hibest_bid_linhao(Hash).call({
     from:callAdd[4]
   })
   return promise;
@@ -255,5 +268,6 @@ module.exports = {
   AuctionStartEvt_linhao,
   HighBidEvt_linhao,
   GetAuthion,
-  GetHibestBider
+  GetHibestBider,
+  GetHibest_bid_linhao
 }

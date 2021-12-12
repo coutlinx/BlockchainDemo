@@ -5,8 +5,28 @@ var router = express.Router()
 var method = require('../config/methodConfig')
 var acc,token
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  res.render('index', {HASH:"",Beneficiary:"",VALUE:"",HighestBider:""})
+router.get('/', async function(req, res,) {
+  pool.Select("select Hash from authion",async (err,result)=>{
+    if(err){
+      console.log(err)
+    }else{
+      let temp= 0
+      let value = 0
+      let Hash = ""
+      for(let i =0;i<result.length;i++){
+        value = await middle.GetHighestAuthion(result[i].Hash)
+        if(value > temp){
+          temp = value
+          Hash = result[i].Hash
+        }
+        console.log(result[i].Hash)
+      }
+      HighestBider = await middle.GetHibestBider(Hash)
+      HighestBid = await middle.GetHibest_bid_linhao(Hash)
+      data = await middle.GetAuthion(Hash)
+      res.render('index', {HASH:Hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
+    }
+  })
 })
 router.post('/', async (req, res) => {
   acc = req.body.acc 
@@ -44,8 +64,9 @@ router.get('/authion/:hash',async(req,res)=>{
   console.log(req.params)
   data = await middle.GetAuthion(req.params.hash)
   HighestBider = await middle.GetHibestBider(req.params.hash)
+  HighestBid = await middle.GetHibest_bid_linhao(req.params.hash)
   console.log(data,HighestBider)
-  res.render('index',{HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:data.value_linhao,HighestBider:HighestBider})
+  res.render('index',{HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
 })
 router.post('/setOwner', (req, res) => {
   console.log(req.body)
@@ -55,9 +76,17 @@ router.post('/setOwner', (req, res) => {
 
 router.post('/bid',async(req,res)=>{
   console.log(req.body)
-  bid = await middle.ObjBit(req.body.ADDDR,req.body.HASH,req.body.VALUE);
-  console.log(bid)
-  res.json({BID:bid})
+  var bid
+  try{
+    bid = await middle.ObjBit(req.body.ADDDR,req.body.HASH,req.body.VALUE);
+  }catch(e){
+    console.log(e.data.stack)
+    res.json({err:e})
+  }finally{
+    // res.json({BID:bid})
+
+  }
+  // console.log(bid)
 })
 
 module.exports = router

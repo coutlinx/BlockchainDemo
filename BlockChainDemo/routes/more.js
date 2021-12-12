@@ -124,4 +124,19 @@ router.post('/start',async(req,res)=>{
     }
   })
 })
+
+router.post('/end',async(req,res)=>{
+  console.log(req.body)
+  End = await mid.EndingAuthion(req.body.ACC,req.body.HASH);
+  query = await method.Readconfig();
+  pool.Query(query.DBCONFIG.EndAuthion,[req.body.HASH],(err,result)=>{
+    if(err){
+      console.log(err);
+    }else{
+      console.log(result);
+      res.json({information:End})
+    }
+  })
+})
 module.exports = router
+ 
