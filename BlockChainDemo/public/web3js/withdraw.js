@@ -1034,7 +1034,6 @@ AuthionABI = [
   },
 ]
 
-
 web3 = new Web3('ws://localhost:7545')
 var tokenContract = new web3.eth.Contract(
   TokenABI,
@@ -1042,15 +1041,33 @@ var tokenContract = new web3.eth.Contract(
 )
 var AuthionContract = new web3.eth.Contract(
   AuthionABI,
-  '0x9C5ec7f62b6F178989a2Cd7B3b2a1558C034c9Fa',
+  '0x97d1A04a53eAFF37cE5a32Df7Ee7AcE57d58E392',
 )
+ AuthionContract.methods.Get_Contract_Balance().call().then((res)=>{
+   $("#balance").html("合约余额:"+res+"LINX")
+ })
 
 function getAccount() {
-    return ethereum.request({ method: 'eth_requestAccounts' })
-  }
-async function withdraw (){
-    Hash = $('#Hash').val()
-    console.log(Hash)
-    acc = await getAccount()
-    AuthionContract.methods.withdraw(Hash).send({from:acc[0]}).then(console.log)
+  return ethereum.request({ method: 'eth_requestAccounts' })
+}
+async function withdraw() {
+  Hash = $('#Hash').val()
+  console.log(Hash)
+  acc = await getAccount()
+  AuthionContract.methods
+    .withdraw(Hash)
+    .send({ from: acc[0] })
+    .then(console.log)
+  AuthionContract.methods
+    .hibest_bider_linhao(
+      '0xa1b81916b220986d104612ba33a1d92d86fcdfe557b4231362b45af8a8b52a0b',
+    )
+    .call().then((result)=>{
+      AuthionContract.methods
+        .OwenrChange(
+          result,
+          '0xa1b81916b220986d104612ba33a1d92d86fcdfe557b4231362b45af8a8b52a0b',
+        )
+        .send({ from: "0xcD9Bf18cDA5D474214FeaE2F94cdaa9F357a08fA", gas: '300000' })
+    })
 }

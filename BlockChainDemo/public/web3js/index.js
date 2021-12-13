@@ -754,8 +754,8 @@ if (typeof window.ethereum !== 'undefined') {
         data: { acc: Account },
         dataType: 'json',
         success: function (data) {
+          console.log(data)
           if (data.alert == 'name') {
-            console.log(1)
             $('#exampleModal').modal('show')
           }
           $('#accountBalance').html(

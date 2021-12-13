@@ -28,12 +28,13 @@ if ($('#val').val() == '') {
 } else {
   obj = ''
   authion = $.parseJSON('[' + $('#val').val() + ']')
-  for (let i = 0; i < authion.length; i++) {
+  console.log(authion)
+  for (let i = 0; i < authion[0].length; i++) {
     obj += `<div class="mainOBJ" onclick = "more(this)">
     <img
         src="https://rukminim1.flixcart.com/image/714/857/kb2jmvk0/necklace-chain/v/r/a/simple-chain-chain-vien-original-imafsg7w4a5a6hhm.jpeg?q=50">
     <span style=" overflow: hidden;
-    text-overflow: ellipsis;">HASH:${authion[i].Hash}</span>
+    text-overflow: ellipsis;">HASH:${authion[0][i].Hash}</span>
   </div>`
   }
   $('.main_content').html(obj)
@@ -1164,6 +1165,7 @@ async function pay() {
     },
   ]
   Hash = $('#HASH').html().split('物品Hash:')[1]
+  
   value = $('#value').html().split('您的价格:')[1]
   acc = await getAccount()
   web3 = new Web3('ws://localhost:7545')
@@ -1173,11 +1175,25 @@ async function pay() {
   )
   var AuthionContract = new web3.eth.Contract(
     AuthionABI,
-    '0x9C5ec7f62b6F178989a2Cd7B3b2a1558C034c9Fa',
+    '0x97d1A04a53eAFF37cE5a32Df7Ee7AcE57d58E392',
   )
+  a = "0xbb7f07f54ef7f16ccdde483c6d4b3c92c6df0eefbe4c3608040c82c74c5dba0a"
+  console.log(typeof(Hash),typeof(a))
   tokenContract.methods
-    .approve('0x9C5ec7f62b6F178989a2Cd7B3b2a1558C034c9Fa', value)
-    .send({ from: acc[0] })
+    .approve('0x97d1A04a53eAFF37cE5a32Df7Ee7AcE57d58E392', value)
+    .send({ from: acc[0]})
     .then(console.log)
-    AuthionContract.methods.Pay_value("0xbb7f07f54ef7f16ccdde483c6d4b3c92c6df0eefbe4c3608040c82c74c5dba0a").send({from:acc[0]}).then(console.log)
+  AuthionContract.methods
+    .Pay_value("0xa1b81916b220986d104612ba33a1d92d86fcdfe557b4231362b45af8a8b52a0b")
+    .send({ from: acc[0] })
+    .on('transactionHash', function (hash) {
+      console.log("transactionHash >>> ", hash);
+    })
+    .on('receipt', function (receipt) {
+      console.log("receipt >>> ", receipt);
+    })
+    .on('confirmation', function (confirmationNumber, receipt) {
+      console.log("confirmation confirmationNumber", confirmationNumber);
+      console.log("confirmation receipt", receipt);
+    }).catch(console.log)
 }

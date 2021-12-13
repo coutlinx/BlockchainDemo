@@ -1,6 +1,6 @@
 var token = '0x242BC188A9FD3fd19d255f52DcA91Be9989b7547'
 var safeMath = '0x88A469Adc8f7A6a9876413dE248D1D2700b0848F'
-var authion = '0x9C5ec7f62b6F178989a2Cd7B3b2a1558C034c9Fa'
+var authion = '0x97d1A04a53eAFF37cE5a32Df7Ee7AcE57d58E392'
 
 var Web3 = require('web3')
 var fs = require('fs')
@@ -32,6 +32,7 @@ async function MyAuctions(callAdd) {
 async function ObjBit(callAdd, Hash, value) {
   const promise = await authionContract.methods.ObjBit(Hash, value).send({
     from: callAdd,
+    gas:'300000'
   })
   return promise
 }

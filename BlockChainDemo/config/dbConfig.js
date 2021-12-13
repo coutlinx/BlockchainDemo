@@ -6,7 +6,7 @@ var pool = mysql.createPool({
     user:'root',
     database:'BLD',
     password:'102400',
-    queueLimit:8
+    queueLimit:20
 });
 
 let Query = async (query,arry,callback)=>{

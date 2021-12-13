@@ -88,11 +88,12 @@ router.post("/getAuthion",async(req,res)=>{
   console.log(req.body)
   query = await method.Readconfig()
   
-  pool.Query(query.DBCONFIG.GetAuthion,[req.body.HASH],(err,result)=>{
+  pool.Query(query.DBCONFIG.GetAuthion,[req.body.HASH],async (err,result)=>{
     if (err){
       console.log(err)
     }else{
-      res.json({"Authion":JSON.stringify(result)})
+      authion = await mid.GetAuthion(result[0].Hash)
+      res.json({"Authion":JSON.stringify(result),Value:authion})
     }
   })
 })

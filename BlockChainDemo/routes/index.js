@@ -24,7 +24,12 @@ router.get('/', async function(req, res,) {
       HighestBider = await middle.GetHibestBider(Hash)
       HighestBid = await middle.GetHibest_bid_linhao(Hash)
       data = await middle.GetAuthion(Hash)
-      res.render('index', {HASH:Hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
+      if(HighestBid ==0){
+        res.render('index', {HASH:Hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
+      }else{
+        res.render('index', {HASH:Hash,Beneficiary:data.owner_linhao,VALUE:temp,HighestBider:HighestBider})
+      }
+      
     }
   })
 })
@@ -66,7 +71,13 @@ router.get('/authion/:hash',async(req,res)=>{
   HighestBider = await middle.GetHibestBider(req.params.hash)
   HighestBid = await middle.GetHibest_bid_linhao(req.params.hash)
   console.log(data,HighestBider)
-  res.render('index',{HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
+  console.log(HighestBid,data.value_linhao)
+  // res.render('index',{HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
+  if(HighestBid != 0){
+    res.render('index', {HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:HighestBid,HighestBider:HighestBider})
+  }else{
+    res.render('index', {HASH:req.params.hash,Beneficiary:data.owner_linhao,VALUE:data.value_linhao,HighestBider:HighestBider})
+  }
 })
 router.post('/setOwner', (req, res) => {
   console.log(req.body)
@@ -83,7 +94,13 @@ router.post('/bid',async(req,res)=>{
     console.log(e.data.stack)
     res.json({err:e})
   }finally{
-    // res.json({BID:bid})
+    pool.Query("insert into addauthion (user,authion,money) values((select ID from user where address = ?),(select id from authion where Hash = ?),?)",[req.body.ADDDR,req.body.HASH,req.body.VALUE],(err,result)=>{
+      if (err){
+        console.log(err)
+      }else{
+        console.log(result)
+      }
+    })
 
   }
   // console.log(bid)

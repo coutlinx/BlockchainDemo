@@ -5,28 +5,11 @@
     "node_modules/**/node_modules"
   ],
   "verbose": true,
-  "execMap": {  
-      "js": "./bin/dev.sh"
+  "execMap": {
+    "js": "./bin/dev.sh"
   },
   "watch": [
     "src/"
   ],
-  "ext": "ts,js,json",
-            "type": "node",
-            "request": "launch",
-            "name": "nodemon",
-            "runtimeExecutable": "nodemon",
-            "program": "${workspaceFolder}/dist/app.js",
-            "restart": true,
-            "console": "integratedTerminal",
-            "internalConsoleOptions": "neverOpen",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "sourceMaps": true,
-            "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
-            ],
-            "cwd": "${workspaceFolder}",
-            "timeout": 25000
-        }
+  "ext": "ts,js,json"
+}

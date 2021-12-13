@@ -190,7 +190,7 @@ function valuation(e) {
     data: { HASH: Hash },
     success: function (data) {
       authion = $.parseJSON(data.Authion)
-      console.log(authion)
+      console.log(data.Value,data)
       table = `
         <div id="addcase" class="modal inmodal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog">
@@ -223,7 +223,7 @@ function valuation(e) {
                               <div class="tab-pane fade" id="list-profile" role="tabpanel"
                                 aria-labelledby="list-profile-list">${authion[0].about}</div>
                               <div class="tab-pane fade" id="list-messages" role="tabpanel"
-                                aria-labelledby="list-messages-list">2000</div>
+                                aria-labelledby="list-messages-list">${data.Value[2]}</div>
                               <div class="tab-pane fade" id="list-nameing" role="tabpanel"
                                 aria-labelledby="list-nameing-list">${authion[0].name}</div>
                                 <div class="tab-pane fade" id="list-settings" role="tabpanel"

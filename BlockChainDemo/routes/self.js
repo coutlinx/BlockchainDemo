@@ -18,20 +18,27 @@ router.get('/', async function (req, res) {
         if (result[0] == undefined) {
           res.render('myself', { Authion: '' })
         } else {
-          money = result[0].money
-          authion = result[0].authion
-          pool.Query(
-            query.DBCONFIG.GetAuthionById,
-            [authion],
-            (err, result) => {
-              if (err) {
-                console.error(err)
-              } else {
-                // console.log(result)
-                res.render('myself', { Authion: JSON.stringify(result[0]) })
-              }
-            },
-          )
+          console.log(result)
+          var arr =[]
+          for(let i=0;i<result.length;i++){
+            money = result[i].money
+            authion = result[i].authion
+            pool.Query(
+              query.DBCONFIG.GetAuthionById,
+              [authion],
+              (err, result) => {
+                if (err) {
+                  console.error(err)
+                } else {
+                  arr.push(result[0])
+                }
+              },
+            )
+          }
+          setTimeout(()=>{
+            console.log((arr))
+            res.render('myself', { Authion: JSON.stringify(arr) })
+          },1000)
         }
       }
     },
